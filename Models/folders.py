@@ -1,14 +1,29 @@
-import user, datetime
+import datetime
 
-class Result:
-    pass
+class Archive:
+    def add(self):
+        pass
 
-class Pending(Result):
-    pass
+    def delete(self):
+        pass
 
-class Archive(Result):
-    #DELETE
-    pass
+class Lab:
+    def result(self):
+        pass
 
-class Present(Result):
-    pass
+    def pending(self):
+        pass
+
+    def present(self):
+        pass
+
+    def cancel(self):
+        pass
+
+class Folder:
+    def __init__(self):
+        lab = Lab()
+    
+    @classmethod
+    def add_to_archive(cls):
+        pass

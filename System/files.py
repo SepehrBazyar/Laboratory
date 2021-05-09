@@ -1,14 +1,17 @@
-import folders
+import Models.folders
 
-class Save:
-    pass
+class MangeFile:
+    def save(self):
+        pass
 
-class Delete:
-    pass
+    def delete(self):
+        pass
 
-class Read:
-    pass
+    def read(self):
+        pass
 
-class Write:
-    pass
+    def creat(self):
+        pass
 
+    def update(self):
+        pass
