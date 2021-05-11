@@ -53,7 +53,14 @@ class Doctor(User):
 
 
 class Operator(User):
-    pass
+    licence: str
+
+    def __init__(self, first_name, last_name, phone, password, licence, email=None, **extra_information):
+        super().__init__(first_name, last_name, phone, password, email, **extra_information)
+        self.licence = licence
+
+    def __repr__(self):
+        return super().__repr__() + f"licence:{self.licence}"
 
 
 # TODO : postponed
