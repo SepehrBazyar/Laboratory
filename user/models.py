@@ -1,5 +1,5 @@
 from core.models import *
-from typing import Optional
+from typing import Optional, Literal
 
 
 class User(BaseModels):
@@ -7,7 +7,7 @@ class User(BaseModels):
     last_name: str
     phone: str
     email = Optional[str]
-    password: str
+    __password: str
     extra_information: dict
 
     # TODO : username
@@ -16,8 +16,12 @@ class User(BaseModels):
         self.last_name = last_name
         self.phone = phone
         self.email = email
-        self.password = password
+        self.__password = password
         self.extra_information = extra_information
+
+    # TODO: ask about pass private from mr.tehrani
+    def get_password(self):
+        return self.__password
 
     def __repr__(self):
         return f"""<[first name:{self.first_name}, 
@@ -25,23 +29,41 @@ class User(BaseModels):
 
 
 class Patient(User):
-    pass
+    gender: Literal["male", "female"]
+    age: int
+    blood_type: Optional[Literal["O", "A", "B", "AB"]]
+
+    def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
+        super().__init__(first_name, last_name, phone, password, **extra_information)
+        self.gender = gender
+        self.age = age
+        self.blood_type = blood_type
 
 
 class Doctor(User):
-    pass
+    # sampler and check the tests
+    expertise: str
+
+    def __init__(self, first_name, last_name, phone, password, expertise, email=None, **extra_information):
+        super().__init__(first_name, last_name, phone, password, email, **extra_information)
+        self.expertise = expertise
+
+    def __repr__(self):
+        return super().__repr__() + f"expertise:{self.expertise}"
 
 
 class Operator(User):
     pass
 
 
-class Sampler(User):
-    pass
+# TODO : postponed
+# class Sampler(User):
+#     pass
 
 
-class Admin(User):  # Developer
-    pass
+# TODO : postponed
+# class Admin(User):  # Developer
+#     pass
 
 
 class Manager(User):
