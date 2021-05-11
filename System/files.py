@@ -1,4 +1,5 @@
-import Models.folders
+# import .Models.folders
+
 
 class MangeFile:
     def save(self):
@@ -10,7 +11,7 @@ class MangeFile:
     def read(self):
         pass
 
-    def creat(self):
+    def create(self):
         pass
 
     def update(self):
