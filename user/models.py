@@ -32,12 +32,13 @@ class Patient(User):
     gender: Literal["male", "female"]
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
-
+    patients = []
     def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
         super().__init__(first_name, last_name, phone, password, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
+        self.patients.append(self)
 
 
 class Doctor(User):
