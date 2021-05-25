@@ -25,7 +25,7 @@ class FileManager(BaseManager):
     def __init__(self, name) -> None:
         self.file = name + 's.dill'
         try:
-            with open(f".\\{self.file}", 'x') as fl:  # save to self directory?
+            with open(f".\\{self.file}", 'x') as fl:  # TODO : save to self directory
                 dill.dump({}, fl)
         except:
             pass

@@ -1,5 +1,5 @@
 from core.models import *
-import core.manager
+from core.manager import *
 from typing import Optional, Literal
 
 
@@ -33,7 +33,7 @@ class Patient(User):
     gender: Literal["male", "female"]
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
-    _FILE = core.manager.FileManager("Patient")
+    _FILE = FileManager("Patient")
     patients = _FILE.read().values()
 
     def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
@@ -41,7 +41,7 @@ class Patient(User):
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
-        self.patients.append(self)
+        self.patients.append(self) # TODO : update by file
         self._FILE.create(self.phone, self)
 
 
