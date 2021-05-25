@@ -26,18 +26,26 @@ class FileManager(BaseManager):
         except:
             pass
 
-    def create(self, ID, instance):
-        with open(f".\\{self.file}", 'ab') as fl:
-            fl.write(f"{str(getattr(instance, ID))} ".encode())
-            fl.write(dill.dumps(instance))
-            fl.write(b'\n')
+    def create(self, ID, instance) -> bool:
+        if not self.read(ID):
+            with open(f".\\{self.file}", 'ab') as fl:
+                fl.write(f"{str(ID)} ".encode())
+                fl.write(dill.dumps(instance))
+                fl.write(b'\n')
+            return True
+        return False
 
     def read(self, ID, attribute=None):
         with open(f".\\{self.file}", 'rb') as fl:
-            while True:
+            flag = True
+            while flag:
                 model = fl.readline().strip().split()
-                if model[0].decode() == ID:
+                if not model:
                     break
+                if model[0].decode() == str(ID):
+                    flag = False
+        if flag:
+            return None
         instance = dill.loads(model[1])
         return getattr(instance, attribute, instance)
 
