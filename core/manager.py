@@ -1,4 +1,3 @@
-from operator import mod
 import dill
 
 from abc import ABC, abstractmethod
@@ -32,11 +31,11 @@ class FileManager(BaseManager):
         if ID not in models:
             models[ID] = instance
             with open(f".\\{self.file}", 'wb') as fl:
-                dill.dump(models)
+                dill.dump(models, fl)
             return True
         return False
 
-    def read(self, ID=None, attribute=None):
+    def read(self, ID=None, attribute: str = None):
         with open(f".\\{self.file}", 'rb') as fl:
             models = dill.load(fl)
         if not ID:
@@ -46,8 +45,15 @@ class FileManager(BaseManager):
         else:
             return False
 
-    def update(self, ID, new_value, attribut=None):
-        instance = self.read(ID)
+    def update(self, ID, attribute: str, new_value) -> bool:
+        models = self.read()
+        if ID in models:
+            setattr(models[ID], attribute, new_value)
+            with open(f".\\{self.file}", 'wb') as fl:
+                dill.dump(models, fl)
+            return True
+        else:
+            return False
 
     def delete(self, ID):
         pass
