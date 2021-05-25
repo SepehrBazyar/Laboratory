@@ -42,8 +42,7 @@ class FileManager(BaseManager):
             return models
         if ID in models:
             return getattr(models[ID], attribute, models[ID])
-        else:
-            return False
+        return False
 
     def update(self, ID, attribute: str, new_value) -> bool:
         models = self.read()
@@ -52,11 +51,16 @@ class FileManager(BaseManager):
             with open(f".\\{self.file}", 'wb') as fl:
                 dill.dump(models, fl)
             return True
-        else:
-            return False
+        return False
 
-    def delete(self, ID):
-        pass
+    def delete(self, ID) -> bool:
+        models = self.read()
+        if ID in models:
+            models.pop(ID)
+            with open(f".\\{self.file}", 'wb') as fl:
+                dill.dump(models, fl)
+            return True
+        return False
 
 
 class DatabaseManager(BaseManager):
