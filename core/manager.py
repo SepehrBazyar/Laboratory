@@ -19,9 +19,9 @@ class BaseManager(ABC):
 
 class FileManager(BaseManager):
     def __init__(self, model) -> None:
-        self.file = model.__name__ + '.dill'
+        self.file = model.__name__ + 's.dill'
         try:
-            with open(f".\\{self.file}", 'x') as fl:
+            with open(f".\\{self.file}", 'x') as fl:  # save to self directory?
                 pass
         except:
             pass
@@ -35,22 +35,18 @@ class FileManager(BaseManager):
             return True
         return False
 
-    def read(self, ID, attribute=None):
+    def read(self, ID=None, attribute=None):
         with open(f".\\{self.file}", 'rb') as fl:
-            flag = True
-            while flag:
-                model = fl.readline().strip().split()
-                if not model:
-                    break
-                if model[0].decode() == str(ID):
-                    flag = False
-        if flag:
-            return None
-        instance = dill.loads(model[1])
-        return getattr(instance, attribute, instance)
+            models = dill.load(fl)
+        if not ID:
+            return models
+        if ID in models:
+            return getattr(models[ID], ID, models[ID])
+        else:
+            return False
 
     def update(self, ID, new_value, attribut=None):
-        pass
+        instance = self.read(ID)
 
     def delete(self, ID):
         pass
