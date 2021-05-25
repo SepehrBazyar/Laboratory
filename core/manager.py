@@ -18,15 +18,22 @@ class BaseManager(ABC):
 
 
 class FileManager(BaseManager):
-    def __init__(self, model) -> None:
-        self.file = model.__name__ + 's.dill'
+    """
+    Managed Files to CRUD Data of Models.
+    """
+
+    def __init__(self, name) -> None:
+        self.file = name + 's.dill'
         try:
             with open(f".\\{self.file}", 'x') as fl:  # save to self directory?
-                pass
+                dill.dump({}, fl)
         except:
             pass
 
     def create(self, ID, instance) -> bool:
+        """
+        Create a New Value in the File By ID for Key and Self for Value.
+        """
         models = self.read()
         if ID not in models:
             models[ID] = instance
@@ -36,6 +43,9 @@ class FileManager(BaseManager):
         return False
 
     def read(self, ID=None, attribute: str = None):
+        """
+        Read Data File and Return All of them or one Item by ID and Attribute.
+        """
         with open(f".\\{self.file}", 'rb') as fl:
             models = dill.load(fl)
         if not ID:
@@ -45,6 +55,9 @@ class FileManager(BaseManager):
         return False
 
     def update(self, ID, attribute: str, new_value) -> bool:
+        """
+        Update Information of a Model in the Data File with the ID.
+        """
         models = self.read()
         if ID in models:
             setattr(models[ID], attribute, new_value)
@@ -54,6 +67,9 @@ class FileManager(BaseManager):
         return False
 
     def delete(self, ID) -> bool:
+        """
+        Delete a Model by the ID from the Data File.
+        """
         models = self.read()
         if ID in models:
             models.pop(ID)
