@@ -28,10 +28,18 @@ class FileManager(BaseManager):
 
     def create(self, ID, instance):
         with open(f".\\{self.file}", 'ab') as fl:
-            fl.write(f"{str(getattr(instance, ID)).encode()} {dill.dumps(instance)}\n")
+            fl.write(f"{str(getattr(instance, ID))} ".encode())
+            fl.write(dill.dumps(instance))
+            fl.write(b'\n')
 
     def read(self, ID, attribute=None):
-        pass
+        with open(f".\\{self.file}", 'rb') as fl:
+            while True:
+                model = fl.readline().strip().split()
+                if model[0].decode() == ID:
+                    break
+        instance = dill.loads(model[1])
+        return getattr(instance, attribute, instance)
 
     def update(self, ID, new_value, attribut=None):
         pass
