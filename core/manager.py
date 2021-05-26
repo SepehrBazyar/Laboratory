@@ -22,10 +22,10 @@ class FileManager(BaseManager):
     Managed Files to CRUD Data of Models.
     """
 
-    def __init__(self, name) -> None:
-        self.file = name + 's.dill'
+    def __init__(self, name, path) -> None:
+        self.file, self.path = name + 's.dill', path
         try:
-            with open(f".\\{self.file}", 'x') as fl:  # TODO : save to self directory
+            with open(f".\\{self.path}\\{self.file}", 'xb') as fl:
                 dill.dump({}, fl)
         except:
             pass
@@ -37,7 +37,7 @@ class FileManager(BaseManager):
         models = self.read()
         if ID not in models:
             models[ID] = instance
-            with open(f".\\{self.file}", 'wb') as fl:
+            with open(f".\\{self.path}\\{self.file}", 'wb') as fl:
                 dill.dump(models, fl)
             return True
         return False
@@ -46,7 +46,7 @@ class FileManager(BaseManager):
         """
         Read Data File and Return All of them or one Item by ID and Attribute.
         """
-        with open(f".\\{self.file}", 'rb') as fl:
+        with open(f".\\{self.path}\\{self.file}", 'rb') as fl:
             models = dill.load(fl)
         if not ID:
             return models
@@ -61,7 +61,7 @@ class FileManager(BaseManager):
         models = self.read()
         if ID in models:
             setattr(models[ID], attribute, new_value)
-            with open(f".\\{self.file}", 'wb') as fl:
+            with open(f".\\{self.path}\\{self.file}", 'wb') as fl:
                 dill.dump(models, fl)
             return True
         return False
@@ -73,7 +73,7 @@ class FileManager(BaseManager):
         models = self.read()
         if ID in models:
             models.pop(ID)
-            with open(f".\\{self.file}", 'wb') as fl:
+            with open(f".\\{self.path}\\{self.file}", 'wb') as fl:
                 dill.dump(models, fl)
             return True
         return False
