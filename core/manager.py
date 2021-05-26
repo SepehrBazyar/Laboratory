@@ -26,7 +26,7 @@ class FileManager(BaseManager):
         self.file, self.path = name + 's.json', path
         try:
             with open(f".\\{self.path}\\{self.file}", 'x') as fl:
-                json.dump({}, fl)
+                json.dump({}, fl, indent=4)
         except:
             pass
 
@@ -51,7 +51,7 @@ class FileManager(BaseManager):
         if not ID:
             return models
         if ID in models:
-            return getattr(models[ID], attribute, models[ID])
+            return models[ID].get(attribute, models[ID])
         return False
 
     def update(self, ID, attribute: str, new_value) -> bool:
@@ -60,9 +60,9 @@ class FileManager(BaseManager):
         """
         models = self.read()
         if ID in models:
-            setattr(models[ID], attribute, new_value)
+            models[ID].update({attribute: new_value})
             with open(f".\\{self.path}\\{self.file}", 'w') as fl:
-                json.dump(models, fl)
+                json.dump(models, fl, indent=4)
             return True
         return False
 
@@ -74,7 +74,7 @@ class FileManager(BaseManager):
         if ID in models:
             models.pop(ID)
             with open(f".\\{self.path}\\{self.file}", 'w') as fl:
-                json.dump(models, fl)
+                json.dump(models, fl, indent=4)
             return True
         return False
 
