@@ -24,8 +24,11 @@ class FileManager(BaseManager):
 
     def __init__(self, name, path) -> None:
         self.file, self.path = name + 's.dill', path
-        with open(f".\\{self.path}\\{self.file}", 'x') as fl:  # TODO : save to self directory
-            dill.dump({}, fl)
+        try:
+            with open(f".\\{self.path}\\{self.file}", 'xb') as fl:
+                dill.dump({}, fl)
+        except:
+            pass
 
     def create(self, ID, instance) -> bool:
         """
