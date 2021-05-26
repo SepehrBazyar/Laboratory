@@ -16,7 +16,8 @@ def register():
 
 
 def repr_all_users():
-    patients = models.Patient.patients
+    patients = list(models.Patient.patients.values())
 
     for i in range(len(patients)):
-        print(f"{i + 1}- ", patients[i])
+        inform = list(patients[i].values())
+        print(f"{i + 1}- ", models.Patient(*inform[0:3], *inform[5:8], inform[3]))

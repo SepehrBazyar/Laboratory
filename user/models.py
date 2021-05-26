@@ -26,32 +26,25 @@ class User(BaseModels):
 
     def __repr__(self):
         return f"""
-<[first name:{self.first_name}, 
-last name:{self.last_name}]>
+<first name:{self.first_name}, 
+ last  name:{self.last_name}>
 """
 
 
 class Patient(User):
-    @staticmethod
-    def __loading(information: dict) -> list:
-        users, result = list(information.values()), []
-        for user in users:
-            inform = list(user.values())
-            result.append(Patient(*inform[0:3], *inform[5:8], inform[3]))
-
     gender: Literal["male", "female"]
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
     _FILE = FileManager("Patient", __name__.split('.')[0])
-    patients = __loading(_FILE.read())
+    patients = _FILE.read()
 
     def __init__(self, first_name, last_name, phone, gender, age, blood_type, email=None, **extra_information):
         super().__init__(first_name, last_name, phone, email, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
-        self._FILE.create(self.phone, self)
-        self.patients = self._FILE.read()
+        self.__class__._FILE.create(self.phone, self)
+        self.__class__.patients = self.__class__._FILE.read()
 
 
 class Doctor(User):
