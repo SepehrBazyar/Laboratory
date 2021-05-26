@@ -1,4 +1,4 @@
-import dill
+import json
 
 from abc import ABC, abstractmethod
 
@@ -22,11 +22,11 @@ class FileManager(BaseManager):
     Managed Files to CRUD Data of Models.
     """
 
-    def __init__(self, name) -> None:
-        self.file = name + 's.dill'
+    def __init__(self, name, path) -> None:
+        self.file, self.path = name + 's.json', path
         try:
-            with open(f".\\{self.file}", 'x') as fl:  # TODO : save to self directory
-                dill.dump({}, fl)
+            with open(f".\\{self.path}\\{self.file}", 'x') as fl:
+                json.dump({}, fl)
         except:
             pass
 
@@ -36,9 +36,9 @@ class FileManager(BaseManager):
         """
         models = self.read()
         if ID not in models:
-            models[ID] = instance
-            with open(f".\\{self.file}", 'wb') as fl:
-                dill.dump(models, fl)
+            models[ID] = instance.__dict__
+            with open(f".\\{self.path}\\{self.file}", 'w') as fl:
+                json.dump(models, fl, indent=4)
             return True
         return False
 
@@ -46,8 +46,8 @@ class FileManager(BaseManager):
         """
         Read Data File and Return All of them or one Item by ID and Attribute.
         """
-        with open(f".\\{self.file}", 'rb') as fl:
-            models = dill.load(fl)
+        with open(f".\\{self.path}\\{self.file}", 'r') as fl:
+            models = json.load(fl)
         if not ID:
             return models
         if ID in models:
@@ -61,8 +61,8 @@ class FileManager(BaseManager):
         models = self.read()
         if ID in models:
             setattr(models[ID], attribute, new_value)
-            with open(f".\\{self.file}", 'wb') as fl:
-                dill.dump(models, fl)
+            with open(f".\\{self.path}\\{self.file}", 'w') as fl:
+                json.dump(models, fl)
             return True
         return False
 
@@ -73,8 +73,8 @@ class FileManager(BaseManager):
         models = self.read()
         if ID in models:
             models.pop(ID)
-            with open(f".\\{self.file}", 'wb') as fl:
-                dill.dump(models, fl)
+            with open(f".\\{self.path}\\{self.file}", 'w') as fl:
+                json.dump(models, fl)
             return True
         return False
 
