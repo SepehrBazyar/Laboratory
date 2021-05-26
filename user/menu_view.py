@@ -19,5 +19,4 @@ def repr_all_users():
     patients = list(models.Patient.patients.values())
 
     for i in range(len(patients)):
-        inform = list(patients[i].values())
-        print(f"{i + 1}- ", models.Patient(*inform[0:3], *inform[5:8], inform[3]))
+        print(f"{i + 1}- ", models.Patient(**patients[i]))
