@@ -33,6 +33,7 @@ class Patient(User):
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
     patients = []
+
     def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
         super().__init__(first_name, last_name, phone, password, **extra_information)
         self.gender = gender
@@ -64,6 +65,16 @@ class Operator(User):
         return super().__repr__() + f"licence:{self.licence}"
 
 
+class Manager(User):
+    educational_degree: str
+
+    def __init__(self, first_name, last_name, phone, password, educational_degree, email=None, **extra_information):
+        super().__init__(first_name, last_name, phone, password, email, **extra_information)
+        self.educational_degree = educational_degree
+
+    def __repr__(self):
+        return super().__repr__() + f"educational_degree:{self.educational_degree}"
+
 # TODO : postponed
 # class Sampler(User):
 #     pass
@@ -72,7 +83,3 @@ class Operator(User):
 # TODO : postponed
 # class Admin(User):  # Developer
 #     pass
-
-
-class Manager(User):
-    pass
