@@ -11,12 +11,13 @@ def register():
     age = int(input("enter your  age:"))
     blood_type = input("enter your blood type(A,B,AB or O) :")
     # __password = input("enter your last name:")
-    models.Patient(first_name, last_name, phone, email, gender, age, blood_type)
+    models.Patient(first_name, last_name, phone, gender, age, blood_type, email)
     print("**new user created**")
 
 
 def repr_all_users():
-    patients = models.Patient.patients
+    patients = list(models.Patient.patients.values())
 
     for i in range(len(patients)):
-        print(f"{i}-", patients[i])
+        inform = list(patients[i].values())
+        print(f"{i + 1}- ", models.Patient(*inform[0:3], *inform[5:8], inform[3]))

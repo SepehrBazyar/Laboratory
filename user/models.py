@@ -12,12 +12,12 @@ class User(BaseModels):
     extra_information: dict
 
     # TODO : username
-    def __init__(self, first_name, last_name, phone, password, email=None, **extra_information):
+    def __init__(self, first_name, last_name, phone, email=None, **extra_information):
         self.first_name = first_name
         self.last_name = last_name
         self.phone = phone
         self.email = email
-        self.__password = password
+        # self.__password = password
         self.extra_information = extra_information
 
     # TODO: ask about pass private from mr.tehrani
@@ -26,7 +26,7 @@ class User(BaseModels):
 
     def __repr__(self):
         return f"""<[first name:{self.first_name}, 
-        last name:{self.last_name}]>"""
+last name:{self.last_name}]>"""
 
 
 class Patient(User):
@@ -34,15 +34,15 @@ class Patient(User):
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
     _FILE = FileManager("Patient", __name__.split('.')[0])
-    patients = [Patient(*item.values()) for item in _FILE.read().values()]
+    patients = _FILE.read()
 
-    def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
-        super().__init__(first_name, last_name, phone, password, **extra_information)
+    def __init__(self, first_name, last_name, phone, gender, age, blood_type, email=None, **extra_information):
+        super().__init__(first_name, last_name, phone, email, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
-        self.patients.append(self) # TODO : update by file
         self._FILE.create(self.phone, self)
+        self.patients = self._FILE.read()
 
 
 class Doctor(User):
