@@ -38,8 +38,8 @@ class Patient(User):
     _FILE = FileManager("Patient", __name__.split('.')[0])
     patients = list(_FILE.read().values())
 
-    def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
-        super().__init__(first_name, last_name, phone, password, **extra_information)
+    def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, email=None, **extra_information):
+        super().__init__(first_name, last_name, phone, password, email, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type

@@ -8,7 +8,7 @@ def register():
     first_name = input("enter your first name:")
     last_name = input("enter your last name:")
     phone = input("enter your phone number:")
-    email = input("enter your email(optional):")
+    email = input("enter your email(optional):") or None
     password = sha256(input("enter your password:").encode()).hexdigest()
     # password = "1234"  # it is just for test
 
@@ -23,7 +23,7 @@ def patient_register():
     gender = input("enter your gender(male or female):")
     age = int(input("enter your  age:"))
     blood_type = input("enter your blood type(A,B,AB or O) :")
-    models.Patient(first_name, last_name, phone, email, gender, age, blood_type)
+    models.Patient(first_name, last_name, phone, password, gender, age, blood_type, email)
     print("Congrats. Your Account Is Created")
 
 
