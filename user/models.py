@@ -7,7 +7,7 @@ class User(BaseModels):
     first_name: str
     last_name: str
     phone: str
-    email = Optional[str]
+    email: str = None
     __password: str
     extra_information: dict
 
@@ -36,13 +36,12 @@ class Patient(User):
     _FILE = FileManager("Patient", __name__.split('.')[0])
     patients = list(_FILE.read().values())
 
-
     def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, **extra_information):
         super().__init__(first_name, last_name, phone, password, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
-        self.patients.append(self) # TODO : update by file
+        self.patients.append(self)  # TODO : update by file
         self._FILE.create(self.phone, self)
 
 

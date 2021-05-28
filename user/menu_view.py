@@ -9,6 +9,7 @@ def register():
     email = input("enter your email(optional):")
     # password = input("enter your last name:")
     password = "1234"  # it is just for test
+
     return first_name, last_name, phone, email, password
 
     # todo : we should get an id to the user or using phone as username. we need this for login
@@ -47,6 +48,5 @@ def manager_register():
 
 def repr_all_users():
     patients = models.Patient.patients
-
     for i in range(len(patients)):
         print(f"{i}-", patients[i])
