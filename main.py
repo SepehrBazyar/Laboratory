@@ -62,7 +62,7 @@ menu_dic = {
     "children": [
         # This is for Login Menu
         {"name": "Login",
-         "function": hello_world,
+         "function": user_view.repr_all_users,
          "description": "Login Users",
          },
 

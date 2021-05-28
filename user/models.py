@@ -8,7 +8,7 @@ class User(BaseModels):
     last_name: str
     phone: str
     email: str = None
-    __password: str
+    _password: str
     extra_information: dict
 
     # TODO : username
@@ -17,16 +17,18 @@ class User(BaseModels):
         self.last_name = last_name
         self.phone = phone
         self.email = email
-        self.__password = password
+        self._password = password
         self.extra_information = extra_information
 
     # TODO: ask about pass private from mr.tehrani
     def get_password(self):
-        return self.__password
+        return self._password
 
     def __repr__(self):
-        return f"""<[first name:{self.first_name}, 
-        last name:{self.last_name}]>"""
+        return f"""
+<first name:{self.first_name}, 
+ last  name:{self.last_name}>
+"""
 
 
 class Patient(User):
@@ -41,8 +43,8 @@ class Patient(User):
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
-        self.patients.append(self)  # TODO : update by file
-        self._FILE.create(self.phone, self)
+        self.__class__._FILE.create(self.phone, self)
+        self.__class__.patients = list(self.__class__._FILE.read().values())
 
 
 class Doctor(User):

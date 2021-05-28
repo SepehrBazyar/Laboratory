@@ -1,4 +1,4 @@
-import dill
+import json
 
 from abc import ABC, abstractmethod
 
@@ -23,10 +23,10 @@ class FileManager(BaseManager):
     """
 
     def __init__(self, name, path) -> None:
-        self.file, self.path = name + 's.dill', path
+        self.file, self.path = name + 's.json', path
         try:
-            with open(f".\\{self.path}\\{self.file}", 'xb') as fl:
-                dill.dump({}, fl)
+            with open(f".\\{self.path}\\{self.file}", 'x') as fl:
+                json.dump({}, fl, indent=4)
         except:
             pass
 
@@ -36,9 +36,9 @@ class FileManager(BaseManager):
         """
         models = self.read()
         if ID not in models:
-            models[ID] = instance
-            with open(f".\\{self.path}\\{self.file}", 'wb') as fl:
-                dill.dump(models, fl)
+            models[ID] = instance.__dict__
+            with open(f".\\{self.path}\\{self.file}", 'w') as fl:
+                json.dump(models, fl, indent=4)
             return True
         return False
 
@@ -46,12 +46,12 @@ class FileManager(BaseManager):
         """
         Read Data File and Return All of them or one Item by ID and Attribute.
         """
-        with open(f".\\{self.path}\\{self.file}", 'rb') as fl:
-            models = dill.load(fl)
+        with open(f".\\{self.path}\\{self.file}", 'r') as fl:
+            models = json.load(fl)
         if not ID:
             return models
         if ID in models:
-            return getattr(models[ID], attribute, models[ID])
+            return models[ID].get(attribute, models[ID])
         return False
 
     def update(self, ID, attribute: str, new_value) -> bool:
@@ -60,9 +60,9 @@ class FileManager(BaseManager):
         """
         models = self.read()
         if ID in models:
-            setattr(models[ID], attribute, new_value)
-            with open(f".\\{self.path}\\{self.file}", 'wb') as fl:
-                dill.dump(models, fl)
+            models[ID].update({attribute: new_value})
+            with open(f".\\{self.path}\\{self.file}", 'w') as fl:
+                json.dump(models, fl, indent=4)
             return True
         return False
 
@@ -73,8 +73,8 @@ class FileManager(BaseManager):
         models = self.read()
         if ID in models:
             models.pop(ID)
-            with open(f".\\{self.path}\\{self.file}", 'wb') as fl:
-                dill.dump(models, fl)
+            with open(f".\\{self.path}\\{self.file}", 'w') as fl:
+                json.dump(models, fl, indent=4)
             return True
         return False
 

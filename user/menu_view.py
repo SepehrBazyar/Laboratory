@@ -1,14 +1,16 @@
 import user.models as models
 
+from hashlib import sha256
+
 
 def register():
     # user_type =
-    first_name = input("enter your name:")
+    first_name = input("enter your first name:")
     last_name = input("enter your last name:")
     phone = input("enter your phone number:")
     email = input("enter your email(optional):")
-    # password = input("enter your last name:")
-    password = "1234"  # it is just for test
+    password = sha256(input("enter your password:").encode()).hexdigest()
+    # password = "1234"  # it is just for test
 
     return first_name, last_name, phone, email, password
 
@@ -49,4 +51,8 @@ def manager_register():
 def repr_all_users():
     patients = models.Patient.patients
     for i in range(len(patients)):
-        print(f"{i}-", patients[i])
+        print(f"""
+{i + 1}-
+<first name:{patients[i]["first_name"]}, 
+ last  name:{patients[i]["last_name"]}>
+""")
