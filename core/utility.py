@@ -25,7 +25,7 @@ def inputer(txt: str, type_str: str, is_optional: str = False,
 
 
 class CheckValid:
-    __email_regex = "^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$"
+    __email_regex = r"^([\w\.\_\-]+)[@]([\w\.\_\-]*\w)[.]([A-Za-z]{2,3})$"
     __phone_number_regex = "^(0)?([]|-|[()]){0}09[0|1|2|3|4]([()]){0}(?:[0-9]([ ]|-|[()]){0,0}){8}$"
 
     @classmethod
