@@ -1,6 +1,7 @@
 import user.models as models
 
 from hashlib import sha256
+from getpass import getpass
 
 
 def register():
@@ -9,7 +10,7 @@ def register():
     last_name = input("enter your last name:")
     phone = input("enter your phone number:")
     email = input("enter your email(optional):") or None
-    password = sha256(input("enter your password:").encode()).hexdigest()
+    password = sha256(getpass("enter your password:").encode()).hexdigest()
     # password = "1234"  # it is just for test
 
     return first_name, last_name, phone, email, password
