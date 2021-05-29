@@ -1,3 +1,4 @@
+import os.path
 from hashlib import sha256
 
 from core.models import *
@@ -16,9 +17,10 @@ class User(BaseModels):
     extra_information: dict
 
     # TODO : username
-    def __init__(self, first_name, last_name, phone, password, email=None, **extra_information):
+    def __init__(self, first_name, last_name, national_code, phone, password, email=None, **extra_information):
         self.first_name = first_name
         self.last_name = last_name
+        self.national_code = national_code
         self.phone = phone
         self.email = email
         self._password = password
@@ -44,10 +46,11 @@ class Patient(User):
 
     def __init__(self, first_name, last_name, national_code, phone, password, gender, age, blood_type, email=None,
                  **extra_information):
-        super().__init__(first_name, last_name, phone, password, email, **extra_information)
+        super().__init__(first_name, last_name, national_code, phone, password, email, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
+        # todo: we should change id for creating file from phone to national_code
         self.__class__._FILE.create(self.phone, self)
         self.__class__.patients = list(self.__class__._FILE.read().values())
 
@@ -77,18 +80,34 @@ class Operator(User):
 
 class Admin:  # Site Admin
 
+    # declare as a class attr, because if we need more than one admin, we are able to save in this file
+    _admin_FILE = FileManager("Admin", __name__.split('.')[0])
+
     def __init__(self):
-        self.username = "admin"
-        self.__pass = self.__pass_generator()
-        self.__admin_password = sha256(self.__pass.encode()).hexdigest()
+        if "admin" in self._admin_FILE.read().keys():
+            with open(os.getcwd() + "\\user\\Admins.json", 'r') as fl:
+                admins = json.load(fl)
+            admin_dict = admins["admin"]
+            self.username = admin_dict["username"]
+            self._password = admin_dict["_password"]
+
+        else:
+            self.username = "admin"
+            self._password = self.__pass_generator()
+            # self.__admin_password = sha256(self.__password.encode()).hexdigest()
+            # admin has not national_code, so we pass his/her username
+            print(self.__dict__)
+            self.__class__._admin_FILE.create(self.username, self)
 
     @staticmethod
     def __pass_generator():
         alphabet = string.ascii_letters + string.digits
-        password = ''.join(secrets.choice(alphabet) for i in range(10))  # for a 10-character password
-        return password
+        password_local = ''.join(secrets.choice(alphabet) for i in range(10))  # for a 10-character password
+        return password_local
 
-    pass
+    @property
+    def password(self):
+        return self._password
 
 # todo : postponed
 # class Manager(User):
