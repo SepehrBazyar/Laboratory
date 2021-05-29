@@ -26,7 +26,7 @@ class BaseManager(ABC):
 
 class FileManager(BaseManager):
     """
-    Managed Files to CRUD Data of Models.
+    Managed JSON Files to CRUD Data of Models.
     """
 
     def __init__(self, name: str, path: str) -> None:
@@ -52,6 +52,7 @@ class FileManager(BaseManager):
             return True
         logging.error(f"{__name__}: {ID} Object Existed in the File.")
         return False
+        raise UserExistError(f"{__name__}: {ID} Object Existed in the File.")
 
     def read(self, ID=None, attribute: str = None):
         """
@@ -67,6 +68,7 @@ class FileManager(BaseManager):
             return models[ID].get(attribute, models[ID])
         logging.error(f"{__name__}: {ID} Not Existed Can't Read Anything.")
         return False
+        raise UserNotFoundError(f"{__name__}: {ID} Not Existed Can't Read Anything.")
 
     def update(self, ID, attribute: str, new_value) -> bool:
         """
@@ -81,6 +83,7 @@ class FileManager(BaseManager):
             return True
         logging.error(f"{__name__}: {ID} Not Existed Can't Change Nothing.")
         return False
+        raise UserNotFoundError(f"{__name__}: {ID} Not Existed Can't Change Nothing.")
 
     def delete(self, ID) -> bool:
         """
@@ -95,6 +98,7 @@ class FileManager(BaseManager):
             return True
         logging.error(f"{__name__}: {ID} Object Not Existed in the File.")
         return False
+        raise UserNotFoundError(f"{__name__}: {ID} Object Not Existed in the File.")
 
 
 class DatabaseManager(BaseManager):
