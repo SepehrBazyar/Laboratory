@@ -68,20 +68,7 @@ menu_dic = {
 
         # This is for Register Menu
         {"name": "Register",
-         "children": [
-             {"name": "Register as a Patient",
-              "description": "Register Patients",
-              "function": user_view.patient_register},
-             {"name": "Register as a Doctor",
-              "description": "Register Doctors",
-              "function": user_view.doctor_register},
-             {"name": "Register as a Operator",
-              "description": "Register Operators",
-              "function": user_view.operator_register},
-             {"name": "Register as a Managers",
-              "description": "Register Managers",
-              "function": user_view.manager_register},
-         ],
+         "function": user_view.register,
          "description": "Register Users",
          },
 

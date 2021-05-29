@@ -1,6 +1,10 @@
+from hashlib import sha256
+
 from core.models import *
 from core.manager import *
 from typing import Optional, Literal
+import secrets
+import string
 
 
 class User(BaseModels):
@@ -38,7 +42,8 @@ class Patient(User):
     _FILE = FileManager("Patient", __name__.split('.')[0])
     patients = list(_FILE.read().values())
 
-    def __init__(self, first_name, last_name, phone, password, gender, age, blood_type, email=None, **extra_information):
+    def __init__(self, first_name, last_name, national_code, phone, password, gender, age, blood_type, email=None,
+                 **extra_information):
         super().__init__(first_name, last_name, phone, password, email, **extra_information)
         self.gender = gender
         self.age = age
@@ -70,21 +75,32 @@ class Operator(User):
         return super().__repr__() + f"licence:{self.licence}"
 
 
-class Manager(User):
-    educational_degree: str
+class Admin:  # Site Admin
 
-    def __init__(self, first_name, last_name, phone, password, educational_degree, email=None, **extra_information):
-        super().__init__(first_name, last_name, phone, password, email, **extra_information)
-        self.educational_degree = educational_degree
+    def __init__(self):
+        self.username = "admin"
+        self.__pass = self.__pass_generator()
+        self.__admin_password = sha256(self.__pass.encode()).hexdigest()
 
-    def __repr__(self):
-        return super().__repr__() + f"educational_degree:{self.educational_degree}"
+    @staticmethod
+    def __pass_generator():
+        alphabet = string.ascii_letters + string.digits
+        password = ''.join(secrets.choice(alphabet) for i in range(10))  # for a 10-character password
+        return password
+
+    pass
+
+# todo : postponed
+# class Manager(User):
+#     educational_degree: str
+#
+#     def __init__(self, first_name, last_name, phone, password, educational_degree, email=None, **extra_information):
+#         super().__init__(first_name, last_name, phone, password, email, **extra_information)
+#         self.educational_degree = educational_degree
+#
+#     def __repr__(self):
+#         return super().__repr__() + f"educational_degree:{self.educational_degree}"
 
 # TODO : postponed
 # class Sampler(User):
-#     pass
-
-
-# TODO : postponed
-# class Admin(User):  # Developer
 #     pass
