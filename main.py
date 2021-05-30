@@ -21,6 +21,19 @@ menu_dic = {
     "name": "Main Menu",
     "children": [
 
+        # This is for Login Menu
+        {"name": "Login",
+         "authorization_function": core_utility.login_authorization,
+         "children_with_authorization": [
+             {"name": "a1",
+              "function": user_view.repr_all_users,
+              # todo: add all options for highest priority user(admin) as children and delete function
+              "description": "a1",
+              },
+         ],
+         "description": "Login Users",
+         },
+
         # This is for Register Menu
         {"name": "Register",
          "function": user_view.register,
