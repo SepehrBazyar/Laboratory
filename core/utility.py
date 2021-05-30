@@ -1,5 +1,7 @@
 import re
 from typing import Optional, Literal, Dict, Union
+import time
+
 
 
 def inputer(txt: str, type_str: str, is_optional: str = False,
@@ -38,3 +40,10 @@ class CheckValid:
     @classmethod
     def username(cls, username:str):
         pass
+
+
+def login_authorization():
+    print("login_authorization")
+    time.sleep(3)
+    #todo : this should return the type of user
+    return True

@@ -1,6 +1,7 @@
 import menu
 import user.menu_view as user_view
 from core.service import initialize_setup
+import core.utility as core_utility
 
 
 class Manage:
@@ -19,11 +20,6 @@ class Input:
 menu_dic = {
     "name": "Main Menu",
     "children": [
-        # This is for Login Menu
-        {"name": "Login",
-         "function": user_view.repr_all_users,
-         "description": "Login Users",
-         },
 
         # This is for Register Menu
         {"name": "Register",

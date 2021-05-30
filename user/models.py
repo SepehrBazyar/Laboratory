@@ -96,7 +96,6 @@ class Admin:  # Site Admin
             self._password = self.__pass_generator()
             # self.__admin_password = sha256(self.__password.encode()).hexdigest()
             # admin has not national_code, so we pass his/her username
-            print(self.__dict__)
             self.__class__._admin_FILE.create(self.username, self)
 
     @staticmethod
