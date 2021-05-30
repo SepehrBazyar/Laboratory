@@ -1,7 +1,8 @@
-import user.models as models
-
+from time import sleep
 from hashlib import sha256
 from getpass import getpass
+import user.models as models
+from Lab.models import CV19
 
 
 def register():
@@ -59,5 +60,24 @@ def repr_all_users():
 """)
 
 
+Patient_list = []
+
+
 def cv19_view():
-    pass
+    print("Enter your profile : ")
+    first_name = input("First Name : ")
+    last_name = input("Last Name : ")
+    phone = input("Phone : ")
+    email = input("Email(Optional) : ")
+
+    patient = models.Patient(first_name, last_name, phone, email)
+    Patient_list.append(patient)
+
+    print("Your profile saved !")
+    print("Testing patient ", end="")
+
+    [sleep(1) or print(".", end="") for i in range(3)]
+
+    cv19 = CV19(patient)
+    print("Done ! ")
+    print("Estimated result time : ", cv19.estimate_time)
