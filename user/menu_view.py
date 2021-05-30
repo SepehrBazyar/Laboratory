@@ -57,3 +57,7 @@ def repr_all_users():
 <first name:{patients[i]["first_name"]}, 
  last  name:{patients[i]["last_name"]}>
 """)
+
+
+def cv19_view():
+    pass
