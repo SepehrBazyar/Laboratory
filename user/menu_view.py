@@ -61,6 +61,7 @@ def repr_all_users():
 
 
 Patient_list = []
+Tests = []
 
 
 def cv19_view():
@@ -79,5 +80,8 @@ def cv19_view():
     [sleep(1) or print(".", end="") for i in range(3)]
 
     cv19 = CV19(patient)
+
     print("Done ! ")
+
+    Tests.append(cv19)
     print("Estimated result time : ", cv19.estimate_time)
