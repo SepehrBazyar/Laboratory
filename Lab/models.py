@@ -20,3 +20,10 @@ class Basetest(BaseModels):
         self.result_time = datetime.now()
         self.__result = result
 
+
+class CV19(Basetest):
+
+    def has_cv19(self):
+        if not hasattr(self, '__result'):
+            raise Exception
+        return bool(self.__result)
