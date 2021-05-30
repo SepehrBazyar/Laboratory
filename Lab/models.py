@@ -6,8 +6,10 @@ from Lab.exceptions import *
 
 
 class Basetest(BaseModels):
-    patients = Patient
-    estimate_time, result_time, create_time = datetime
+    patients: Patient
+    estimate_time: datetime
+    result_time: datetime
+    create_time: datetime
 
     def __init__(self, patient) -> None:
         self.patient = patient
@@ -17,3 +19,4 @@ class Basetest(BaseModels):
     def set_result(self, result):
         self.result_time = datetime.now()
         self.__result = result
+
