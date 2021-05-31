@@ -85,7 +85,7 @@ class Admin:  # Site Admin
 
     def __init__(self):
         if "admin" in self._admin_FILE.read().keys():
-            with open(os.getcwd() + "\\user\\Admins.json", 'r') as fl:
+            with open(os.getcwd() + "\\data\\Admins.json", 'r') as fl:
                 admins = json.load(fl)
             admin_dict = admins["admin"]
             self.username = admin_dict["username"]

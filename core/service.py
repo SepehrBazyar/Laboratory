@@ -8,6 +8,6 @@ def initialize_setup():
     admin = Admin()
     username = admin.username
     password = admin.password
-    with open(os.getcwd() + "/user/admin.info", "wt") as info_file:
+    with open(os.getcwd() + "/data/admin.info", "wt") as info_file:
         print(f"username: {username}, pass={password}", file=info_file)
     logging.info("admin.info is created")
