@@ -66,11 +66,12 @@ class MenuList(Menu):
 
 class MenuList_with_authorization(Menu):
 
-    def __init__(self, function, name=None, parent=None, description=""):
+    def __init__(self, function, name=None, parent=None, description="", access_dict=None):
         super().__init__(name, parent, description)
         self.function = function
         self.top_to_down = 0
         self.user_type = ""
+        self.access_dict = access_dict
 
     def __call__(self, *args, **kwargs):
         if self.top_to_down == 0:
@@ -81,11 +82,17 @@ class MenuList_with_authorization(Menu):
             print(f"{self.parent.name} > {self.name}" if self.parent else self.name)
             print(f"{self.description}")
             print("\n> items:")
-
+            # this is for test
+            self.user_type = "manager"
             # todo: it should give option according to user type, here is just a dispaly of that, we should add condition
             # todo: after propmt and ban forbiden propmt as well
-            for i, c in enumerate(self.children):
-                print('\t', f'{i + 1}.', repr(c))
+            if self.access_dict:
+                user_access = self.access_dict[self.user_type]
+                for i, c in enumerate(user_access):
+                    print('\t', f'{i + 1}.', repr(self.children[int(c) - 1]))
+            else:
+                for i, c in enumerate(self.children):
+                    print('\t', f'{i + 1}.', repr(c))
 
             def validator(s: str):
                 if s.isnumeric():

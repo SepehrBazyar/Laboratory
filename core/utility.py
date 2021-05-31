@@ -45,5 +45,5 @@ class CheckValid:
 def login_authorization():
     print("login_authorization")
     time.sleep(3)
-    #todo : this should return the type of user
+    #todo : this should return the type of user. Type of user is str type like "patient"
     return True

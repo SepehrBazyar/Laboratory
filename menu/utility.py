@@ -9,7 +9,8 @@ def generate_menu(menu_dict: dict, parent=None) -> Menu:
             generate_menu(c, menu)
     elif 'children_with_authorization' in menu_dict:
         menu = MenuList_with_authorization(menu_dict['authorization_function'], menu_dict.get('name', None),
-                                           parent=parent, description=menu_dict.get('description'))
+                                           parent=parent, description=menu_dict.get('description'),
+                                           access_dict=menu_dict.get('access_dict'))
         for c in menu_dict['children_with_authorization']:
             generate_menu(c, menu)
 

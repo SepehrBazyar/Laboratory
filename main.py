@@ -25,6 +25,8 @@ menu_dic = {
         # This is for Login Menu
         {"name": "Login",
          "authorization_function": core_utility.login_authorization,
+         "access_dict": {"patient": "1", "operator": ["1", "2"], "doctor": ["1", "3"], "manager": ["1", "3", "4"],
+                         "admin": ["1", "2", "5"]},
          "children_with_authorization": [
 
              {"name": "patient",
