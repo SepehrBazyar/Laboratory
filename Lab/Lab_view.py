@@ -39,3 +39,7 @@ def update_test():
 
 def repr_all_test():
     pass
+
+
+def manage_test():
+    pass

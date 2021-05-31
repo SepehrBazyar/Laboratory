@@ -119,9 +119,21 @@ menu_dic = {
 
              {"name": "admin",
               "children": [
-                  {"name": "update test",
-                   "function": user_view.repr_all_patients,
-                   "description": "doctor update test",
+                  {"name": "register doctor",
+                   "function": user_view.register_doctor,
+                   "description": "register new doctor",
+                   },
+                  {"name": "register operator",
+                   "function": user_view.register_operator,
+                   "description": "register new operator",
+                   },
+                  {"name": "manage tests",
+                   "function": Lab_view.manage_test,
+                   "description": "managing tests",
+                   },
+                  {"name": "manage users",
+                   "function": user_view.manage_users,
+                   "description": "managing users",
                    },
               ],
               "description": "admin menu",
@@ -135,15 +147,8 @@ menu_dic = {
          "function": user_view.register,
          "description": "Register Users",
          },
-
-        # {
-        #     "name": "list users",
-        #     "description": "list users",
-        #     "function": user_view.repr_all_users
-        # }
     ],
     "description": ""
-
 }
 # initialize setup(create admin, ...)
 initialize_setup()

@@ -41,3 +41,15 @@ def repr_all_doctors():
 
 def repr_all_operators():
     pass
+
+
+def register_doctor():
+    pass
+
+
+def register_operator():
+    pass
+
+
+def manage_users():
+    pass
