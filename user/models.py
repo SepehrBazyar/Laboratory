@@ -81,7 +81,7 @@ class Operator(User):
 class Admin:  # Site Admin
 
     # declare as a class attr, because if we need more than one admin, we are able to save in this file
-    _admin_FILE = FileManager("Admin", __name__.split('.')[0])
+    _admin_FILE = FileManager("Admin")
 
     def __init__(self):
         if "admin" in self._admin_FILE.read().keys():
