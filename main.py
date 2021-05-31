@@ -47,10 +47,39 @@ menu_dic = {
               },
 
 
+             {"name": "operator",
+              "children": [
+                  {"name": "new test",
+                   "children": [
+                       {"name": "Covid19 test",
+                        "function": Lab_view.cv19_view,
+                        "description": "Covid19 test",
+                        },
+                   ],
+                   "description": "register new test",
+                   },
+                  {"name": "update test",
+                   "function": Lab_view.update_test,
+                   "description": "operator update test",
+                   },
+                  {"name": "all tests",
+                   "function": Lab_view.repr_all_test,
+                   "description": "all tests list",
+                   },
+                  {"name": "all patients",
+                   "function": user_view.repr_all_patients,
+                   "description": "all patients list",
+                   },
+              ],
+              "description": "operator menu",
+              },
+
+
+
              {"name": "doctor",
               "children": [
                   {"name": "update test",
-                   "function": user_view.repr_all_users,
+                   "function": user_view.repr_all_patients,
                    "description": "doctor update test",
                    },
               ],
@@ -59,7 +88,7 @@ menu_dic = {
              {"name": "admin",
               "children": [
                   {"name": "update test",
-                   "function": user_view.repr_all_users,
+                   "function": user_view.repr_all_patients,
                    "description": "doctor update test",
                    },
               ],
@@ -68,14 +97,12 @@ menu_dic = {
              {"name": "manager",
               "children": [
                   {"name": "update test",
-                   "function": user_view.repr_all_users,
+                   "function": user_view.repr_all_patients,
                    "description": "doctor update test",
                    },
               ],
               "description": "manager menu",
               },
-
-             # todo: add all options for highest priority user(admin) as children and delete function
          ],
          "description": "Login Users",
          },

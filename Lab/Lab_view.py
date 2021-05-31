@@ -28,5 +28,14 @@ def cv19_view():
     Tests.append(cv19)
     print("Estimated result time : ", cv19.estimate_time)
 
+
 def result():
+    pass
+
+
+def update_test():
+    pass
+
+
+def repr_all_test():
     pass

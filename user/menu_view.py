@@ -25,7 +25,7 @@ def register():
     # todo : we agreed to use national code ad username, so it should be considered in login
 
 
-def repr_all_users():
+def repr_all_patients():
     patients = models.Patient.patients
     for i in range(len(patients)):
         print(f"""
@@ -33,5 +33,3 @@ def repr_all_users():
 <first name:{patients[i]["first_name"]}, 
  last  name:{patients[i]["last_name"]}>
 """)
-
-
