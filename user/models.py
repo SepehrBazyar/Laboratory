@@ -41,7 +41,7 @@ class Patient(User):
     gender: Literal["male", "female"]
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
-    _FILE = FileManager("Patient", __name__.split('.')[0])
+    _FILE = FileManager("Patient")
     patients = list(_FILE.read().values())
 
     def __init__(self, first_name, last_name, national_code, phone, password, gender, age, blood_type, email=None,
@@ -51,7 +51,7 @@ class Patient(User):
         self.age = age
         self.blood_type = blood_type
         # todo: we should change id for creating file from phone to national_code
-        self.__class__._FILE.create(self.phone, self)
+        self.__class__._FILE.create(self.national_code, self)
         self.__class__.patients = list(self.__class__._FILE.read().values())
 
 

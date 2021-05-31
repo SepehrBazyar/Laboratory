@@ -29,14 +29,14 @@ class FileManager(BaseManager):
     Managed JSON Files to CRUD Data of Models.
     """
 
-    def __init__(self, name: str, path: str) -> None:
-        self.file, self.path = name + 's.json', path
+    def __init__(self, name: str) -> None:
+        self.file, self.path = name + 's.json', 'data'
         try:
             with open(f".\\{self.path}\\{self.file}", 'x') as fl:
                 json.dump({}, fl, indent=4)
-            logging.info(f"{__name__}: {self.file} File Created in {path} Directory.")
+            logging.info(f"{__name__}: {self.file} File Created in {self.path} Directory.")
         except FileExistsError:
-            logging.warning(f"{__name__}: {self.file} File Existed in {path} Directory.")
+            logging.warning(f"{__name__}: {self.file} File Existed in {self.path} Directory.")
         logging.debug(f"{__name__}: File Manager Successfully.")
 
     def create(self, ID, instance) -> bool:
