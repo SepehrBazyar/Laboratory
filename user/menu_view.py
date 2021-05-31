@@ -33,3 +33,11 @@ def repr_all_patients():
 <first name:{patients[i]["first_name"]}, 
  last  name:{patients[i]["last_name"]}>
 """)
+
+
+def repr_all_doctors():
+    pass
+
+
+def repr_all_operators():
+    pass

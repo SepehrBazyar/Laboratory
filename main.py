@@ -46,7 +46,6 @@ menu_dic = {
               "description": "patient menu",
               },
 
-
              {"name": "operator",
               "children": [
                   {"name": "new test",
@@ -74,17 +73,50 @@ menu_dic = {
               "description": "operator menu",
               },
 
-
-
              {"name": "doctor",
               "children": [
                   {"name": "update test",
-                   "function": user_view.repr_all_patients,
+                   "function": Lab_view.update_test,
                    "description": "doctor update test",
+                   },
+                  {"name": "all tests",
+                   "function": Lab_view.repr_all_test,
+                   "description": "all tests list",
+                   },
+                  {"name": "all patients",
+                   "function": user_view.repr_all_patients,
+                   "description": "all patients list",
                    },
               ],
               "description": "doctor menu",
               },
+
+             {"name": "manager",
+              "children": [
+                  {"name": "confirm test",
+                   "function": Lab_view.update_test,
+                   "description": "manager confirm test",
+                   },
+                  {"name": "all tests",
+                   "function": Lab_view.repr_all_test,
+                   "description": "all tests list",
+                   },
+                  {"name": "all patients",
+                   "function": user_view.repr_all_patients,
+                   "description": "all patients list",
+                   },
+                  {"name": "all doctors",
+                   "function": user_view.repr_all_doctors,
+                   "description": "all doctors list",
+                   },
+                  {"name": "all operators",
+                   "function": user_view.repr_all_operators,
+                   "description": "all operators list",
+                   },
+              ],
+              "description": "manager menu",
+              },
+
              {"name": "admin",
               "children": [
                   {"name": "update test",
@@ -93,15 +125,6 @@ menu_dic = {
                    },
               ],
               "description": "admin menu",
-              },
-             {"name": "manager",
-              "children": [
-                  {"name": "update test",
-                   "function": user_view.repr_all_patients,
-                   "description": "doctor update test",
-                   },
-              ],
-              "description": "manager menu",
               },
          ],
          "description": "Login Users",
