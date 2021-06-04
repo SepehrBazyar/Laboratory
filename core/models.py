@@ -2,5 +2,6 @@ from abc import ABC, abstractclassmethod
 
 
 class BaseModels(ABC):
-    pass
 
+    def to_dict(self):
+        return vars(self)

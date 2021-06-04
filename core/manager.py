@@ -1,10 +1,12 @@
 import json
-# import psycopg2
+from psycopg2 import connect
+from psycopg2._psycopg import connection, cursor
+import dbconfig
 import logging
-
+from contextlib import contextmanager
 from abc import ABC, abstractmethod
 from .exceptions import *
-
+from core.models import BaseModels
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)-10s - %(message)s')
@@ -12,7 +14,7 @@ logging.basicConfig(level=logging.INFO,
 
 class BaseManager(ABC):
     @abstractmethod
-    def create(self): pass
+    def create(self, model, table): pass
 
     @abstractmethod
     def read(self): pass
@@ -102,14 +104,40 @@ class FileManager(BaseManager):
 
 
 class DatabaseManager(BaseManager):
-    def create(self):
+
+    def __init__(self, base_model: BaseModels):
+        self.base_model = base_model
+
+    def normalizer(self):
         pass
 
+    def create(self, model, table):
+        attrs: dict = model.to_dict()
+        dict_values = (10,) + tuple(attrs.values())
+        self.send_query(f"INSERT INTO {table} VALUES {dict_values}")
+
     def read(self):
+        # self.send_query()
         pass
 
     def update(self):
+        # self.send_query()
         pass
 
     def delete(self):
+        # self.send_query()
         pass
+
+    def send_query(self, query):
+        with self.access_database() as lab_cursor:
+            # query = "INSERT INTO users VALUES ('8', 'ali', 'gholami', '1378632', '222', '', '1', '33278622', 'male', '34', 'A')"
+            lab_cursor.execute(query)
+
+    @contextmanager
+    def access_database(self):
+        conn: connection = connect(dbconfig.config)
+        curs: cursor = conn.cursor()
+        yield curs
+        curs.close()
+        conn.commit()
+        conn.close()

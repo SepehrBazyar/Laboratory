@@ -17,14 +17,16 @@ class User(BaseModels):
     extra_information: dict
 
     # TODO : username
-    def __init__(self, first_name, last_name, national_code, phone, password, email=None, **extra_information):
+    def __init__(self, first_name, last_name, national_code, phone, type_of_users_id,password, email=None, **extra_information):
         self.first_name = first_name
         self.last_name = last_name
         self.national_code = national_code
         self.phone = phone
         self.email = email
+        self.type_of_users_id = type_of_users_id
         self._password = password
-        self.extra_information = extra_information
+        # self.extra_information = extra_information
+        # self.extra_information = extra_information
 
     # TODO: ask about pass private from mr.tehrani
     def get_password(self):
@@ -32,9 +34,9 @@ class User(BaseModels):
 
     def __repr__(self):
         return f"""
-<first name:{self.first_name}, 
- last  name:{self.last_name}>
-"""
+                <first name:{self.first_name}, 
+                 last  name:{self.last_name}>
+                """
 
 
 class Patient(User):
@@ -44,9 +46,9 @@ class Patient(User):
     _FILE = FileManager("Patient")
     patients = list(_FILE.read().values())
 
-    def __init__(self, first_name, last_name, national_code, phone, password, gender, age, blood_type, email=None,
-                 **extra_information):
-        super().__init__(first_name, last_name, national_code, phone, password, email, **extra_information)
+    def __init__(self, first_name, last_name, national_code, phone, type_of_users_id, password, gender, age, blood_type,
+                 email=None, **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, type_of_users_id, password, email, **extra_information)
         self.gender = gender
         self.age = age
         self.blood_type = blood_type
