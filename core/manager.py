@@ -17,7 +17,7 @@ class BaseManager(ABC):
     def create(self, model, table): pass
 
     @abstractmethod
-    def read(self): pass
+    def read(self, table): pass
 
     @abstractmethod
     def update(self): pass
@@ -114,9 +114,11 @@ class DatabaseManager(BaseManager):
         query = f"INSERT INTO {table} VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
         self.send_query(query, dict_values)
 
-    def read(self):
-        # self.send_query()
-        pass
+    def read(self, table):
+        query = f"SELECT * FROM {table}"
+        with self.access_database() as lab_cursor:
+            lab_cursor.execute(query)
+            return lab_cursor.fetchall()
 
     def update(self):
         # self.send_query()
@@ -126,7 +128,7 @@ class DatabaseManager(BaseManager):
         # self.send_query()
         pass
 
-    def send_query(self, query, data):
+    def send_query(self, query, data=None):
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query, data)
 

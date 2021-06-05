@@ -83,7 +83,7 @@ class MenuList_with_authorization(Menu):
             print(f"{self.description}")
             print("\n> items:")
             # this is for test
-            self.user_type = "manager"
+            self.user_type = "operator"
             # todo: it should give option according to user type, here is just a dispaly of that, we should add condition
             # todo: after propmt and ban forbiden propmt as well
             if self.access_dict:

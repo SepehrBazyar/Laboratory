@@ -31,13 +31,18 @@ def register():
 
 
 def repr_all_patients():
-    patients = models.Patient.patients
-    for i in range(len(patients)):
-        print(f"""
-{i + 1}-
-<first name:{patients[i]["first_name"]}, 
- last  name:{patients[i]["last_name"]}>
-""")
+    users = u_manger.read("users")
+    for user in users:
+        print(user)
+
+
+#     patients = models.Patient.patients
+#     for i in range(len(patients)):
+#         print(f"""
+# {i + 1}-
+# <first name:{patients[i]["first_name"]},
+#  last  name:{patients[i]["last_name"]}>
+# """)
 
 
 def repr_all_doctors():
