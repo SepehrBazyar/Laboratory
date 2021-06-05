@@ -20,7 +20,7 @@ class BaseManager(ABC):
     def read(self, table): pass
 
     @abstractmethod
-    def update(self, table, row_id): pass
+    def update(self, table, **kwargs): pass
 
     @abstractmethod
     def delete(self, table, row_id): pass
@@ -120,9 +120,17 @@ class DatabaseManager(BaseManager):
             lab_cursor.execute(query)
             return lab_cursor.fetchall()
 
-    def update(self):
-        # self.send_query()
-        pass
+    def update(self, table, **kwargs):
+        """kwargs should include id of tables and column name an amount
+            Example: national-code=11111, first_name=reza, last_name=gholami"""
+        set_string = ""
+        condition_string_key = list(kwargs.keys())[0]
+        condition_string_value = kwargs[condition_string_key]
+        condition_string = f"{condition_string_key}='{condition_string_value}'"
+        for key, value in kwargs.items():
+            set_string += f"{key}='{value}', "
+        query = f"UPDATE {table} SET {set_string[:-2]} where {condition_string}"
+        self.send_query(query)
 
     def delete(self, table, row_id):
         query = f"DELETE FROM {table} where id={row_id}"
