@@ -13,24 +13,23 @@ class User(BaseModels):
     last_name: str
     phone: str
     email: str = None
-    _password: str
+    password: str
     extra_information: dict
 
     # TODO : username
-    def __init__(self, first_name, last_name, national_code, phone, type_of_users_id,password, email=None, **extra_information):
+    def __init__(self, first_name, last_name, national_code, phone, email, password, type_of_user, **extra_information):
         self.first_name = first_name
         self.last_name = last_name
         self.national_code = national_code
         self.phone = phone
         self.email = email
-        self.type_of_users_id = type_of_users_id
-        self._password = password
-        # self.extra_information = extra_information
-        # self.extra_information = extra_information
+        self.password = password
+        self.extra_information = json.dumps(extra_information)
+        self.type_of_user = type_of_user
 
     # TODO: ask about pass private from mr.tehrani
     def get_password(self):
-        return self._password
+        return self.password
 
     def __repr__(self):
         return f"""
@@ -46,13 +45,13 @@ class Patient(User):
     _FILE = FileManager("Patient")
     patients = list(_FILE.read().values())
 
-    def __init__(self, first_name, last_name, national_code, phone, type_of_users_id, password, gender, age, blood_type,
-                 email=None, **extra_information):
-        super().__init__(first_name, last_name, national_code, phone, type_of_users_id, password, email, **extra_information)
-        self.gender = gender
-        self.age = age
-        self.blood_type = blood_type
-        # todo: we should change id for creating file from phone to national_code
+    def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, email, type_of_user=1,
+                         **extra_information)  # type_of_user=1 as patient
+        # self.gender = gender
+        # self.age = age
+        # self.blood_type = blood_type
+        # # todo: we should change id for creating file from phone to national_code
         self.__class__._FILE.create(self.national_code, self)
         self.__class__.patients = list(self.__class__._FILE.read().values())
 

@@ -105,16 +105,14 @@ class FileManager(BaseManager):
 
 class DatabaseManager(BaseManager):
 
-    def __init__(self, base_model: BaseModels):
-        self.base_model = base_model
-
     def normalizer(self):
         pass
 
     def create(self, model, table):
         attrs: dict = model.to_dict()
-        dict_values = (10,) + tuple(attrs.values())
-        self.send_query(f"INSERT INTO {table} VALUES {dict_values}")
+        dict_values = tuple(attrs.values())
+        query = f"INSERT INTO {table} VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+        self.send_query(query, dict_values)
 
     def read(self):
         # self.send_query()
@@ -128,10 +126,9 @@ class DatabaseManager(BaseManager):
         # self.send_query()
         pass
 
-    def send_query(self, query):
+    def send_query(self, query, data):
         with self.access_database() as lab_cursor:
-            # query = "INSERT INTO users VALUES ('8', 'ali', 'gholami', '1378632', '222', '', '1', '33278622', 'male', '34', 'A')"
-            lab_cursor.execute(query)
+            lab_cursor.execute(query, data)
 
     @contextmanager
     def access_database(self):
