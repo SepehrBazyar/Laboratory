@@ -4,7 +4,7 @@ from core.utility import *
 from hashlib import sha256
 from getpass import getpass
 import user.models as models
-from Lab.models import CV19
+from lab.models import CV19
 
 
 def register():
