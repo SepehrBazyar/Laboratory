@@ -1,6 +1,8 @@
 import json
-# import psycopg2
 import logging
+
+from psycopg2 import connect
+from psycopg2._psycopg import connection, cursor
 
 from abc import ABC, abstractmethod
 from .exceptions import *

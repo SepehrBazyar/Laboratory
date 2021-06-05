@@ -4,17 +4,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login</title>
+        <style>
+            input , button {
+                width: 100%;
+            }
+            form > div {
+                width: 576px;
+                border: 3px solid black;
+                padding: 1rem 2rem 1rem 1rem;
+                margin: auto;
+            }
+            @media only screen and (max-width: 768px) {
+                input , button {
+                    margin: auto;
+                }
+                form > div {
+                    width: 85%;
+                    border: none;
+                    padding: 1rem 1.5rem 1rem 0.5rem;
+                }
+            }
+        </style>
     </head>
     <body>
         <div>
-            <form action="">
+            <form>
                 <h1 style="text-align: center;">Login</h1>
                 <div>
                     <label for="uname"><b>Username</b></label><br>
                     <input type="text" placeholder="Enter Username" name="uname" required><br>
                     <label for="passwd"><b>Password</b></label><br>
-                    <input type="password" placeholder="Enter Password" name="passwd" minlength="4" required><br>
-                    <input type="submit" value="Login">
+                    <input type="password" placeholder="Enter Password" name="passwd" minlength="4" required>
+                    <br><br><button type="submit">Login</button>
                 </div>
             </form>
         </div>
