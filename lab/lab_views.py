@@ -1,5 +1,5 @@
 from user import models
-from Lab.models import CV19
+from lab.models import CV19
 from time import sleep
 
 Patient_list = []

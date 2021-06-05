@@ -1,6 +1,6 @@
 import menu
 import user.menu_view as user_view
-import Lab.Lab_view as Lab_view
+import lab.lab_views as Lab_view
 from core.service import initialize_setup
 import core.utility as core_utility
 
