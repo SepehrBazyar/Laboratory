@@ -20,10 +20,10 @@ class BaseManager(ABC):
     def read(self, table): pass
 
     @abstractmethod
-    def update(self): pass
+    def update(self, table, row_id): pass
 
     @abstractmethod
-    def delete(self): pass
+    def delete(self, table, row_id): pass
 
 
 class FileManager(BaseManager):
@@ -124,9 +124,9 @@ class DatabaseManager(BaseManager):
         # self.send_query()
         pass
 
-    def delete(self):
-        # self.send_query()
-        pass
+    def delete(self, table, row_id):
+        query = f"DELETE FROM {table} where id={row_id}"
+        self.send_query(query)
 
     def send_query(self, query, data=None):
         with self.access_database() as lab_cursor:
