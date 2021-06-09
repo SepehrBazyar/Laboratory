@@ -61,7 +61,7 @@
             cursor: pointer;
         }
 
-        body>strong {
+        strong {
             display: block;
             color: #018bdb;
             margin: 45px 45px 20px 20px;
@@ -94,6 +94,15 @@
             text-align: center;
             font-size: 28px;
         }
+        
+        .valid-feedback , .invalid-feedback {
+            text-align: right;
+        }
+
+        .card-body {
+            margin: 50px auto;
+            padding: 0 1rem;
+        }
     </style>
 </head>
 
@@ -102,27 +111,37 @@
     <div class="container">
         <div class="card">
             <form class="was-validated">
-                <h1><strong>ورود</strong></h1>
-                <div class="form-group">
-                    <label for="national"><i class="gb gb_nature_people"></i></label>
-                    <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
-                        minlength="10" maxlength="10" required>
-                    <div class="valid-feedback">صحیح</div>
-                    <div class="invalid-feedback">نامعتبر(دقیقا دَه رقم)</div>
+                <div class="card-header">
+                    <h1><strong>ورود</strong></h1>
                 </div>
-                <div class="form-group">
-                    <label for="password"><i class="gb gb_vpn_key"></i></label>
-                    <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
-                        required>
-                    <div class="valid-feedback">صحیح</div>
-                    <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="national"><i class="gb gb_nature_people"></i></label>
+                        <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
+                            minlength="10" maxlength="10" required>
+                        <div class="valid-feedback">صحیح</div>
+                        <div class="invalid-feedback">نامعتبر(دقیقا &#1776 &#1777 رقم)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="gb gb_vpn_key"></i></label>
+                        <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
+                            required>
+                        <div class="valid-feedback">صحیح</div>
+                        <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                        <label class="custom-control-label" for="customCheck">مرا بخاطر بسپار</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-submit">ورود</button>
+                        </div>
+                        <div class="col">
+                            <button type="reset" class="btn btn-reset">پاکسازی</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                    <label class="custom-control-label" for="customCheck">مرا بخاطر بسپار</label>
-                </div>
-                <button type="submit" class="btn btn-submit">ورود</button>
-                <button type="reset" class="btn btn-reset">پاکسازی</button>
             </form>
         </div>
     </div>
