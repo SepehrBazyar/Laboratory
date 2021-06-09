@@ -26,7 +26,7 @@ def login():
         return render_template("login.html")
     else:
         _vars = request.form
-        if '1' + _vars.get('national') in Patient.patients and \
-                Patient.patients['1' + _vars.get('national')]['password'] == _vars.get('password'):
+        user = Patient._FILE.read('1' + _vars.get('national'))
+        if user and user['password'] == sha256(_vars.get('password').encode()).hexdigest():
             return redirect(f"/profile/{'1' + _vars.get('national')}")
         return render_template("login.html")
