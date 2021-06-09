@@ -14,16 +14,15 @@ def register():
         _vars = request.form
         Patient(_vars.get("username").split(" ", 1)[0],
                 _vars.get("username").split(" ", 1)[1],
-                _vars.get("national"),
-                _vars.get("phone"),
-                _vars.get("email"),
-                password=_vars.get("password"),)
+                _vars.get("national"), _vars.get("phone"),
+                _vars.get("password"), "male", 20,
+                "O", _vars.get("email"))
 
-    return redirect(f"/profile/{len(Patient.patients)-1}")
+    return redirect(f"/profile/{Patient.patients['1' + _vars.get('national')]}")
 
 
 def login():
     if request.method == "GET":
-        pass
+        return render_template("login.html")
     else:
-        pass
+        _vars = request.form
