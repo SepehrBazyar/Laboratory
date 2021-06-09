@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request , redirect
+from flask import Flask, render_template, request, redirect
 from .models import *
 
 
@@ -17,6 +17,13 @@ def register():
                 _vars.get("national"),
                 _vars.get("phone"),
                 _vars.get("email"),
-                password= _vars.get("password"),)
+                password=_vars.get("password"),)
 
     return redirect(f"/profile/{len(Patient.patients)-1}")
+
+
+def login():
+    if request.method == "GET":
+        pass
+    else:
+        pass
