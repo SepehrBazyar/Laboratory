@@ -20,21 +20,20 @@ class access_database:
 
 
 # creating test_info table query
-create_table_queries.append("""CREATE TABLE test_info (
-            id SERIAL PRIMARY KEY, 
+create_table_queries.append("""CREATE TABLE test_info ( 
             test_name CHAR(50) NOT NULL,
             price INT,
-            extra_data JSON NOT NULL );""")
+            extra_data JSON NOT NULL,
+            id SERIAL PRIMARY KEY);""")
 
 # creating user_type table query
 create_table_queries.append("""CREATE TABLE user_type (
-            id SERIAL PRIMARY KEY, 
             type char(20) NOT NULL, 
-            extra_data JSON NULL );""")
+            extra_data JSON NULL,
+            id SERIAL PRIMARY KEY);""")
 
 # creating users table query
 create_table_queries.append("""CREATE TABLE users (
-            id SERIAL PRIMARY KEY, 
             first_name CHAR(50) NOT NULL,
             last_name CHAR(50) NOT NULL,
             national_code char(10) UNIQUE NOT NULL , 
@@ -42,6 +41,7 @@ create_table_queries.append("""CREATE TABLE users (
             email CHAR(100),
             password CHAR(50) NOT NULL,
             type_id INT NOT NULL,
+            id SERIAL PRIMARY KEY,
             CONSTRAINT fk_type
                FOREIGN KEY(type_id) 
                REFERENCES user_type(id)
@@ -50,12 +50,12 @@ create_table_queries.append("""CREATE TABLE users (
 
 # creating person tests query
 create_table_queries.append("""CREATE TABLE tests (
-            id serial PRIMARY KEY, 
             request_date DATE NOT NULL ,
             result_date DATE NOT NULL ,
             result JSON NOT NULL , 
             user_id INT NOT NULL , 
             test_info_id INT NOT NULL , 
+            id serial PRIMARY KEY, 
             CONSTRAINT fk_user
                FOREIGN KEY(user_id) 
                REFERENCES users(id)
