@@ -28,5 +28,6 @@ def login():
         _vars = request.form
         user = Patient._FILE.read('1' + _vars.get('national'))
         if user and user['password'] == sha256(_vars.get('password').encode()).hexdigest():
+            print(_vars.get('remember'))
             return redirect(f"/profile/{'1' + _vars.get('national')}")
         return render_template("login.html")
