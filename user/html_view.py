@@ -1,10 +1,16 @@
+from datetime import timedelta
 from flask import render_template, request, redirect, make_response
+from flask.helpers import url_for
 from .models import *
 
 
 def profile(_id):
-    user = Patient.patients[_id]
-    return render_template("resume.html", data=user)
+    cookies = request.cookies
+    if cookies.get('_ID'):
+        user = Patient.patients[_id]
+        return render_template("resume.html", data=user)
+    else:
+        return redirect(url_for('register'))
 
 
 def register():
@@ -39,6 +45,8 @@ def login():
                 html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
                 resp = make_response(html_str)
                 if _vars.get('remember'):
+                    resp.set_cookie('_ID', '1' + _vars.get('national'), max_age=timedelta(days=1))
+                else:
                     resp.set_cookie('_ID', '1' + _vars.get('national'))
                 return resp
             return render_template("login.html")
