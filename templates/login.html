@@ -1,187 +1,80 @@
-<!DOCTYPE html>
-<html lang="fa-IR">
+{% extends "base.html" %}
+{% block title %}ورود{% endblock %}
+{% block extra_style %}
+.valid-feedback,
+.invalid-feedback {
+text-align: right;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
-    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>ورود</title>
-    <style>
-        html {
-            background-image: url("https://www.labnetinternational.com/sites/www.labnetinternational.com/files/blogsies/header-images/iStock-949946968.jpg");
-            height: 500px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-            background: #fafafa;
-        }
+.card {
+margin: 0.5rem auto;
+}
 
-        *,
-        body {
-            direction: rtl;
-            font-family: Yekan, sans-serif;
-            padding: 0;
-            margin: 0;
-            font-size: 18px;
-            box-sizing: border-box;
-        }
+.card-body {
+margin: 50px auto;
+padding: 0 1rem;
+}
 
-        .center {
-            margin: 0 auto;
-            text-align: center;
-        }
+.custom-control.custom-checkbox {
+padding-left: 0;
+text-align: right;
+}
 
-        .btn {
-            min-width: 110px;
-            background: #2196f3;
-            color: white;
-            outline: none;
-            padding: 5px 20px;
-            text-align: center;
-            margin: 40px auto;
-            border-radius: 5px;
-            border: 2px solid #018bdb;
-            text-shadow: 0 1px 0 #000;
-            box-shadow: 0 0 5px inset #777, 0 0 10px #777;
-        }
+label.custom-control-label {
+position: relative;
+padding-right: 1.5rem;
+}
 
-        .btn-submit {
-            background: #3bbf40;
-            border-color: #26863b;
-            width: 100%;
-        }
-
-        .btn-reset {
-            background: #ff2222;
-            border-color: #e32e00;
-            width: 100%;
-        }
-
-        .btn:hover {
-            box-shadow: 0 0 10px #777;
-            cursor: pointer;
-        }
-
-        strong {
-            display: block;
-            color: #018bdb;
-            margin: 0.5rem auto 0.5rem auto;
-            font-size: 35px;
-            text-align: center;
-            text-shadow: 0 1px 0 #000;
-        }
-
-        input {
-            box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
-            border-radius: 5px;
-            outline: none;
-            padding: 5px 10px;
-            margin-top: 10px;
-            border: 1px solid #eee;
-        }
-
-        label {
-            margin-top: 10px;
-        }
-
-        label>i {
-            text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
-        }
-
-        form>div>label {
-            border-radius: 0 5px 5px 0;
-            color: #018bdb;
-            padding: 0 10px;
-            text-align: center;
-            font-size: 28px;
-        }
-
-        .valid-feedback,
-        .invalid-feedback {
-            text-align: right;
-        }
-
-        .card {
-            margin: 0.5rem auto;
-        }
-
-        .card-body {
-            margin: 50px auto;
-            padding: 0 1rem;
-        }
-
-        .custom-control.custom-checkbox {
-            padding-left: 0;
-            text-align: right;
-        }
-
-        label.custom-control-label {
-            position: relative;
-            padding-right: 1.5rem;
-        }
-
-        label.custom-control-label::before,
-        label.custom-control-label::after {
-            right: 0;
-            left: auto;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="card">
-            <form action="{{ url_for('login') }}" method="POST">
-                <div class="card-header">
-                    <h1><strong>ورود</strong></h1>
+label.custom-control-label::before,
+label.custom-control-label::after {
+right: 0;
+left: auto;
+}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="card-header">
+                <h1><strong>ورود</strong></h1>
+            </div>
+            <div class="card-body">
+                <div class="form-group was-validated">
+                    <!-- <label for="national"><i class="gb gb_nature_people"></i></label> -->
+                    <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
+                        minlength="10" maxlength="10" required>
+                    <div class="valid-feedback">صحیح</div>
+                    <div class="invalid-feedback">نامعتبر(دقیقا &#1776 &#1777 رقم)</div>
                 </div>
-                <div class="card-body">
-                    <div class="form-group was-validated">
-                        <!-- <label for="national"><i class="gb gb_nature_people"></i></label> -->
-                        <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
-                            minlength="10" maxlength="10" required>
-                        <div class="valid-feedback">صحیح</div>
-                        <div class="invalid-feedback">نامعتبر(دقیقا &#1776 &#1777 رقم)</div>
-                    </div>
-                    <div class="form-group was-validated">
-                        <!-- <label for="password"><i class="gb gb_vpn_key"></i></label> -->
-                        <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
-                            required>
-                        <div class="valid-feedback">صحیح</div>
-                        <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
-                    </div>
-                    <!-- <select name="post" class="custom-select mb-3">
+                <div class="form-group was-validated">
+                    <!-- <label for="password"><i class="gb gb_vpn_key"></i></label> -->
+                    <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
+                        required>
+                    <div class="valid-feedback">صحیح</div>
+                    <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
+                </div>
+                <!-- <select name="post" class="custom-select mb-3">
                         <option selected>لطفا سِمَت خود را انتخاب نمایید</option>
                         <option value="patient">بیمار</option>
                         <option value="doctor">دکتر</option>
                     </select> -->
-                    <div class="custom-control custom-checkbox mb-3">
-                        <input type="checkbox" class="custom-control-input" id="remember" name="remember">
-                        <label class="custom-control-label" for="remember">مرا بخاطر بسپار</label>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <button type="submit" class="btn btn-submit">ورود</button>
-                        </div>
-                        <div class="col">
-                            <button type="reset" class="btn btn-reset">پاکسازی</button>
-                        </div>
-                    </div>
-                    <center>
-                        <a href="{{ url_for('register') }}">کاربر جدید هستید؟ ثبت نام</a>
-                    </center>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                    <label class="custom-control-label" for="remember">مرا بخاطر بسپار</label>
                 </div>
-            </form>
-        </div>
+                <div class="form-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-submit">ورود</button>
+                    </div>
+                    <div class="col">
+                        <button type="reset" class="btn btn-reset">پاکسازی</button>
+                    </div>
+                </div>
+                <center>
+                    <a href="{{ url_for('register') }}">کاربر جدید هستید؟ ثبت نام</a>
+                </center>
+            </div>
+        </form>
     </div>
-
-</body>
-
-</html>
+</div>
+{% endblock %}
