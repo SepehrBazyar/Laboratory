@@ -41,12 +41,13 @@ create_table_queries.append("""CREATE TABLE users (
             email CHAR(100),
             password CHAR(50) NOT NULL,
             type_id INT NOT NULL,
+            extra_data JSON NOT NULL,
             id SERIAL PRIMARY KEY,
             CONSTRAINT fk_type
                FOREIGN KEY(type_id) 
                REFERENCES user_type(id)
-               ON DELETE RESTRICT 
-               ON UPDATE RESTRICT);""")
+               ON DELETE SET NULL 
+               ON UPDATE SET NULL);""")
 
 # creating person tests query
 create_table_queries.append("""CREATE TABLE tests (
@@ -59,13 +60,13 @@ create_table_queries.append("""CREATE TABLE tests (
             CONSTRAINT fk_user
                FOREIGN KEY(user_id) 
                REFERENCES users(id)
-               ON DELETE RESTRICT 
-               ON UPDATE RESTRICT,
+               ON DELETE SET NULL 
+               ON UPDATE SET NULL,
             CONSTRAINT fk_test_info
                FOREIGN KEY(test_info_id) 
                REFERENCES test_info(id)
-               ON DELETE RESTRICT 
-               ON UPDATE RESTRICT);""")
+               ON DELETE SET NULL 
+               ON UPDATE SET NULL);""")
 
 # creating tables
 with access_database() as database_cursor:
