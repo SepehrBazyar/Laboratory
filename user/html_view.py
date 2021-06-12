@@ -22,13 +22,19 @@ def register():
             return render_template("register.html")
         else:
             _vars = request.form
-            Patient(_vars.get("username").split(" ", 1)[0],
-                    _vars.get("username").split(" ", 1)[1],
-                    _vars.get("national"), _vars.get("phone"),
-                    _vars.get("password"), "male", 20,
-                    "O", _vars.get("email"))
-
-        return redirect(f"/profile/{'1' + _vars.get('national')}")
+            try:
+                Patient(_vars.get("username").split(" ", 1)[0],
+                        _vars.get("username").split(" ", 1)[1],
+                        _vars.get("national"), _vars.get("phone"),
+                        _vars.get("password"), "male", 20,
+                        "O", _vars.get("email") or None)
+            except AssertionError:
+                return render_template("register.html")
+            else:
+                html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
+                resp = make_response(html_str)
+                resp.set_cookie('_ID', '1' + _vars.get('national'))
+                return resp
 
 
 def login():

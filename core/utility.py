@@ -32,11 +32,11 @@ class CheckValid:
 
     @classmethod
     def email(cls, email: str) -> bool:
-        return True if re.search(cls.__email_regex, email) else False
+        return re.search(cls.__email_regex, email)
 
     @classmethod
     def phone_number(cls, phone_number: str):
-        return True if re.search(cls.__phone_number_regex, phone_number) else False
+        return re.search(cls.__phone_number_regex, phone_number)
     @classmethod
     def username(cls, username:str):
         pass

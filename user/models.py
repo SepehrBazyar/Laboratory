@@ -3,6 +3,7 @@ from hashlib import sha256
 
 from core.models import *
 from core.manager import *
+from core.utility import *
 from typing import Optional, Literal
 import secrets
 import string
@@ -23,8 +24,10 @@ class User(BaseModels):
         self.first_name = first_name
         self.last_name = last_name
         self.national_code = national_code
+        assert CheckValid.phone_number(phone)
         self.phone = phone
         self.password = sha256(password.encode()).hexdigest()
+        if email: assert CheckValid.email(email)
         self.email = email
         self.type_of_user = type_of_user
         self.extra_information = json.dumps(extra_information)
