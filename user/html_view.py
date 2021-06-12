@@ -45,7 +45,7 @@ def login():
                 html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
                 resp = make_response(html_str)
                 if _vars.get('remember'):
-                    resp.set_cookie('_ID', '1' + _vars.get('national'), max_age=timedelta(days=1))
+                    resp.set_cookie('_ID', '1' + _vars.get('national'), max_age=timedelta(weeks=1))
                 else:
                     resp.set_cookie('_ID', '1' + _vars.get('national'))
                 return resp
