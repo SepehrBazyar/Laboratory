@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import render_template, request, redirect, make_response
 from .models import *
 
 
@@ -22,12 +22,19 @@ def register():
 
 
 def login():
-    if request.method == "GET":
-        return render_template("login.html")
+    cookies = request.cookies
+    if cookies.get('_ID'):
+        return redirect(f"/profile/{cookies.get('_ID')}")
     else:
-        _vars = request.form
-        user = Patient._FILE.read('1' + _vars.get('national'))
-        if user and user['password'] == sha256(_vars.get('password').encode()).hexdigest():
-            print(_vars.get('remember'))
-            return redirect(f"/profile/{'1' + _vars.get('national')}")
-        return render_template("login.html")
+        if request.method == "GET":
+            return render_template("login.html")
+        else:
+            _vars = request.form
+            user = Patient._FILE.read('1' + _vars.get('national'))
+            if user and user['password'] == sha256(_vars.get('password').encode()).hexdigest():
+                html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
+                resp = make_response(html_str)
+                if _vars.get('remember'):
+                    resp.set_cookie('_ID', '1' + _vars.get('national'))
+                return resp
+            return render_template("login.html")
