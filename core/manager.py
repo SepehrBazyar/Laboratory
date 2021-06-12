@@ -1,10 +1,10 @@
 import json
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
-import dbconfig
 import logging
 from contextlib import contextmanager
 from abc import ABC, abstractmethod
+import dbconfig
 from .exceptions import *
 from core.models import BaseModels
 
@@ -104,6 +104,17 @@ class FileManager(BaseManager):
 
 
 class DatabaseManager(BaseManager):
+
+    def get_id(self, table, **kwargs):
+        """kwargs should include table name and parameter=value that you have
+        Example: users, national-code=11111"""
+        column = list(kwargs.keys())[0]
+        value = kwargs[column]
+        condition = f"{table}.{column}='{value}'"
+        query = f"SELECT {table}.id from {table} where {condition};"
+        with self.access_database() as lab_cursor:
+            lab_cursor.execute(query)
+            return lab_cursor.fetchone()[0]
 
     def normalizer(self):
         pass
