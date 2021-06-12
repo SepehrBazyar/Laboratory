@@ -23,8 +23,9 @@ def register():
     age = int(input("enter your  age:"))
     blood_type = input("enter your blood type(A,B,AB or O) :")
     user_patient = models.Patient(first_name=first_name, last_name=last_name, national_code=national_code, phone=phone,
-                                  password=password, email=email, gender=gender, age=age, blood_type=blood_type)
-    u_manger.create(model=user_patient, table="users")
+                                  password=password, email=email, gender=gender, age=age,
+                                  blood_type=blood_type)
+    u_manger.create(table="users", model=user_patient)
     print("Congrats. Your Account Is Created")
 
     # todo : we agreed to use national code ad username, so it should be considered in login

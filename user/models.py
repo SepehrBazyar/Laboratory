@@ -24,8 +24,8 @@ class User(BaseModels):
         self.phone = phone
         self.email = email
         self.password = password
-        self.extra_information = json.dumps(extra_information)
         self.type_of_user = type_of_user
+        self.extra_information = json.dumps(extra_information)
 
     # TODO: ask about pass private from mr.tehrani
     def get_password(self):

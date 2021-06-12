@@ -13,8 +13,9 @@ logging.basicConfig(level=logging.INFO,
 
 
 class BaseManager(ABC):
+
     @abstractmethod
-    def create(self, model, table): pass
+    def create(self, table, model): pass
 
     @abstractmethod
     def read(self, table): pass
@@ -119,7 +120,7 @@ class DatabaseManager(BaseManager):
     def normalizer(self):
         pass
 
-    def create(self, model, table):
+    def create(self, table, model):
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
         query = f"INSERT INTO {table} VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
@@ -132,12 +133,13 @@ class DatabaseManager(BaseManager):
             return lab_cursor.fetchall()
 
     def update(self, table, **kwargs):
-        """kwargs should include id of tables and column name an amount
-            Example: national-code=11111, first_name=reza, last_name=gholami"""
+        """kwargs should include id of a row and one or more column=amount for updating
+            Example: row_id=1, first_name=reza, last_name=gholami"""
         set_string = ""
         condition_string_key = list(kwargs.keys())[0]
         condition_string_value = kwargs[condition_string_key]
         condition_string = f"{condition_string_key}='{condition_string_value}'"
+        kwargs.pop(condition_string_key)
         for key, value in kwargs.items():
             set_string += f"{key}='{value}', "
         query = f"UPDATE {table} SET {set_string[:-2]} where {condition_string}"
