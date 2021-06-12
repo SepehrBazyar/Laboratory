@@ -8,17 +8,21 @@ def profile(_id):
 
 
 def register():
-    if request.method == "GET":
-        return render_template("register.html")
+    cookies = request.cookies
+    if cookies.get('_ID'):
+        return redirect(f"/profile/{cookies.get('_ID')}")
     else:
-        _vars = request.form
-        Patient(_vars.get("username").split(" ", 1)[0],
-                _vars.get("username").split(" ", 1)[1],
-                _vars.get("national"), _vars.get("phone"),
-                _vars.get("password"), "male", 20,
-                "O", _vars.get("email"))
+        if request.method == "GET":
+            return render_template("register.html")
+        else:
+            _vars = request.form
+            Patient(_vars.get("username").split(" ", 1)[0],
+                    _vars.get("username").split(" ", 1)[1],
+                    _vars.get("national"), _vars.get("phone"),
+                    _vars.get("password"), "male", 20,
+                    "O", _vars.get("email"))
 
-    return redirect(f"/profile/{'1' + _vars.get('national')}")
+        return redirect(f"/profile/{'1' + _vars.get('national')}")
 
 
 def login():
