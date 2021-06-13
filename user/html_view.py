@@ -61,9 +61,5 @@ def login():
 
 def logout():
     resp = make_response(render_template("login.html"))
-    try:
-        resp.delete_cookie('_ID')
-    except:
-        pass
-    finally:
-        return resp
+    resp.delete_cookie('_ID')
+    return resp
