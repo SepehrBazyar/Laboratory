@@ -1,8 +1,11 @@
+import json
+
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
 import dbconfig
 
 create_table_queries = []
+insert_table_queries = []
 
 
 # context manager for accessing database
@@ -68,7 +71,66 @@ create_table_queries.append("""CREATE TABLE tests (
                ON DELETE SET NULL 
                ON UPDATE SET NULL);""")
 
+patient_extra_data = json.dumps({"gender": "", "age": "", "blood_type": ""})
+doctor_extra_data = json.dumps({"expertise": ""})
+operator_extra_data = json.dumps({"licence": ""})
+
+corona_extra_data = json.dumps({"rest_time": ""})
+cbc_extra_data = json.dumps({"WBC": ""})
+blood_extra_data = json.dumps({"HDL": ""})
+
+# insert patient in user_type
+insert_table_queries.append(
+    [
+        "INSERT INTO user_type (type, extra_data) VALUES (%s, %s);",
+        ('patient', patient_extra_data)
+    ]
+)
+# insert doctor in user_type
+insert_table_queries.append(
+    [
+        "INSERT INTO user_type (type, extra_data) VALUES (%s, %s);",
+        ('doctor', doctor_extra_data)
+    ]
+)
+# insert operator in user_type
+insert_table_queries.append(
+    [
+        "INSERT INTO user_type (type, extra_data) VALUES (%s, %s);",
+        ('operator', operator_extra_data)
+    ]
+)
+
+# insert corona in test_info
+insert_table_queries.append(
+    [
+        "INSERT INTO test_info (test_name,price, extra_data) VALUES (%s, %s, %s);",
+        ('corona', '500', corona_extra_data)
+    ]
+)
+
+# insert cbc in test_info
+insert_table_queries.append(
+    [
+        "INSERT INTO test_info (test_name,price, extra_data) VALUES (%s, %s, %s);",
+        ('cbc', '200', cbc_extra_data)
+    ]
+)
+
+# insert blood in test_info
+insert_table_queries.append(
+    [
+        "INSERT INTO test_info (test_name,price, extra_data) VALUES (%s, %s, %s);",
+        ('blood', '200', blood_extra_data)
+    ]
+)
+
 # creating tables
 with access_database() as database_cursor:
     for query in create_table_queries:
         database_cursor.execute(query)
+
+# inserting data
+with access_database() as database_cursor:
+    for query in insert_table_queries:
+        database_cursor.execute(query[0], query[1])
