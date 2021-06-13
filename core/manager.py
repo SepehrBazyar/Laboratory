@@ -120,7 +120,8 @@ class DatabaseManager(BaseManager):
             return lab_cursor.fetchall()
 
     def update(self, table, **kwargs):
-        """kwargs should include id of a row and one or more column=amount for updating
+        """this cannot update json content
+            kwargs should include id of a row and one or more column=amount for updating
             Example: row_id=1, first_name=reza, last_name=gholami"""
         set_string = ""
         condition_string_key = list(kwargs.keys())[0]
@@ -139,10 +140,10 @@ class DatabaseManager(BaseManager):
     def get_id(self, table, **kwargs):
         """kwargs should include table name and one column=amount for searching
         Example: users, national-code=11111"""
-        column = list(kwargs.keys())[0]
-        value = kwargs[column]
-        condition = f"{table}.{column}='{value}'"
-        query = f"SELECT {table}.id from {table} where {condition};"
+        condition = ""
+        for column, value in kwargs.items():
+            condition += f"{table}.{column}='{value}' and "
+        query = f"SELECT {table}.id from {table} where {condition[:-5]};"
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query)
             return lab_cursor.fetchone()[0]
@@ -176,6 +177,20 @@ class DatabaseManager(BaseManager):
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query)
             return lab_cursor.fetchall()
+
+    def update_json_content(self, table, **kwargs):
+        """this method is for updating jason content
+            kwargs should include id of a row, target columns, and one or more json content for updating
+            Example: row_id=1, extra_info= {"age":"22"}"""
+        condition_string_key = list(kwargs.keys())[0]
+        condition_string_value = kwargs[condition_string_key]
+        condition_string = f"{condition_string_key}='{condition_string_value}'"
+        kwargs.pop(condition_string_key)
+        for column, json_content in kwargs.items():
+            json_content_str = str(json_content).replace("'", '"')
+            set_string = f"{column}={column}::jsonb - '{', '.join(json_content.keys())}'|| '{json_content_str}', "
+            query = f"UPDATE {table} SET {set_string[:-2]} where {condition_string};"
+            self.send_query(query)
 
     def send_query(self, query, data=None):
         with self.access_database() as lab_cursor:
