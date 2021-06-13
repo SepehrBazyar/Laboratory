@@ -20,13 +20,13 @@
         <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-8"><i class="gb gb_phone ml-2"></i>شماره تماس : <span>{{ data.phone }}</span></span>
         <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_account_box ml-2"></i>کد ملی : <span>{{ data.national_code }}</span></span>
         <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_email ml-2"></i>ایمیل : <span>{{ data.email }}</span></span>
-        <form class="bg-black rtl bg-opacity-40 font-bold mt-8 p-4 md:p-8 grid gap-4 xl:gap-8 grid-cols-6 rounded-lg w-full" action="">
+        <form class="bg-black rtl bg-opacity-40 font-bold mt-8 p-4 md:p-8 grid gap-4 xl:gap-8 grid-cols-6 rounded-lg w-full" action="{{ url_for('new_test') }}">
             <label for="ttype" class="text-center text-yellow-400 block text-xl md:text-2xl col-span-6 mb-0 ltr">ثبت آزمایش جدید<i class="gb gb_add_box ml-2"></i></label>
             <select id="ttype" name="test_type" class="rounded transition-all py-2 px-4 col-span-6 lg:col-span-4 w-full">
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="covid" selected disabled hidden>انتخاب کنید</option>
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="covid">کرونا</option>
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="ccv">خون</option>
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="etiad">اعتیاد</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="" selected disabled hidden>انتخاب کنید</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="corona">کرونا</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="cbc">خون</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="blood">گروه خونی</option>
             </select>
             <button type="submit" class="bg-yellow-400 ltr transition-all col-span-6 lg:col-span-2 rounded py-2 px-4 w-full text-white border-2 border-yellow-400 hover:bg-yellow-500 hover:border-yellow-600 font-bold">ثبت <i class="gb gb_done"></i></button>
         </form>

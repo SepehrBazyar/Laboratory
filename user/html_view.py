@@ -1,12 +1,16 @@
 from datetime import timedelta
-from flask import render_template, request, redirect, make_response
+from time import sleep
+from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
 from hashlib import sha256
+
 from core.utility import retrieve_user
+from lab.lab_views import register_test, result
 from .models import *
 from core.manager import *
 
 db_manger = DatabaseManager()
+
 
 def profile(_id):
     cookies = request.cookies
@@ -15,7 +19,7 @@ def profile(_id):
         user = retrieve_user(check_res[0])
         tests = db_manger.read_user_tests(user)
         print(*tests, sep='\n')
-        return render_template("resume.html", data=user, tests=tests)
+        return render_template("resume.html", data=user, tests=tests, )
     else:
         return redirect(url_for('register'))
 
@@ -46,20 +50,21 @@ def register():
                 password = sha256(_vars.get("password").encode()).hexdigest()
                 email = _vars.get("email")
                 if user_type == 'patient':
-                    extra_data_dict = {"gender":_vars.get("gender"), "age":_vars.get("age"), "blood_type":_vars.get("blood_type")}
+                    extra_data_dict = {"gender": _vars.get("gender"), "age": _vars.get("age"),
+                                       "blood_type": _vars.get("blood_type")}
                     user = Patient(first_name=first_name, last_name=last_name, national_code=national_code,
-                                          phone=phone,
-                                          password=password, email=email, **extra_data_dict)
+                                   phone=phone,
+                                   password=password, email=email, **extra_data_dict)
                 elif user_type == 'doctor':
                     extra_data_dict = {"expertise": _vars.get("expertise")}
                     user = Doctor(first_name=first_name, last_name=last_name, national_code=national_code,
-                                         phone=phone,
-                                         password=password, email=email, **extra_data_dict)
+                                  phone=phone,
+                                  password=password, email=email, **extra_data_dict)
                 elif user_type == 'operator':
                     extra_data_dict = {"licence": _vars.get("licence")}
                     user = Operator(first_name=first_name, last_name=last_name, national_code=national_code,
-                                           phone=phone,
-                                           password=password, email=email, **extra_data_dict)
+                                    phone=phone,
+                                    password=password, email=email, **extra_data_dict)
                 db_manger.create(table="users", model=user)
                 print("Congrats. Your Account Is Created")
             except AssertionError:
@@ -82,12 +87,9 @@ def login():
             _vars = request.form
             # user = Patient._FILE.read('1' + _vars.get('national'))
             password_hashed = sha256(_vars.get('password').encode()).hexdigest()
-            print(password_hashed, _vars.get('national'))
             check_res = db_manger.check_record('users', national_code=_vars.get('national'), password=password_hashed)
-            print(check_res[0])
             if check_res:
                 user = retrieve_user(check_res[0])
-                print(user, vars(user))
                 if user.password.strip() == password_hashed:
 
                     html_str = redirect(f"/profile/{_vars.get('national')}")
@@ -105,3 +107,14 @@ def logout():
     resp = redirect("/login")
     resp.delete_cookie('_ID')
     return resp
+
+
+def new_test():
+    test_name = request.args.get('test_type')
+    cookies = request.cookies
+    if cookies.get('_ID'):
+        check_res = db_manger.check_record('users', national_code=cookies.get('_ID'))
+        user = retrieve_user(check_res[0])
+        register_test(test_name, user)
+        sleep(3)
+    return redirect('/login')

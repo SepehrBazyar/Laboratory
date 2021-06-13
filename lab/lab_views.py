@@ -51,6 +51,8 @@ def register_test(test_name, patient):
 def result(test_id):
     test = db_manager.read(table='tests', row_id=test_id)
     res = test[0][2]
+    res = json.dumps(res)
+    res = json.loads(res)
     return res
 
 
