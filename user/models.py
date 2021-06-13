@@ -48,10 +48,6 @@ class Patient(User):
     def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
         super().__init__(first_name, last_name, national_code, phone, email, type_of_user=1,
                          **extra_information)  # type_of_user=1 as patient
-        # self.gender = gender
-        # self.age = age
-        # self.blood_type = blood_type
-        # # todo: we should change id for creating file from phone to national_code
         self.__class__._FILE.create(self.national_code, self)
         self.__class__.patients = list(self.__class__._FILE.read().values())
 
@@ -60,23 +56,17 @@ class Doctor(User):
     # sampler and check the tests
     expertise: str
 
-    def __init__(self, first_name, last_name, phone, password, expertise, email=None, **extra_information):
-        super().__init__(first_name, last_name, phone, password, email, **extra_information)
-        self.expertise = expertise
-
-    def __repr__(self):
-        return super().__repr__() + f"expertise:{self.expertise}"
+    def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, email, type_of_user=2,
+                         **extra_information)  # type_of_user=2 as doctor
 
 
 class Operator(User):
     licence: str
 
-    def __init__(self, first_name, last_name, phone, password, licence, email=None, **extra_information):
-        super().__init__(first_name, last_name, phone, password, email, **extra_information)
-        self.licence = licence
-
-    def __repr__(self):
-        return super().__repr__() + f"licence:{self.licence}"
+    def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, email, type_of_user=3,
+                         **extra_information)  # type_of_user=3 as operator
 
 
 class Admin:  # Site Admin
