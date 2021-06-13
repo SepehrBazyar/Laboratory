@@ -1,5 +1,4 @@
 from time import sleep
-import user.models as models
 from core.utility import *
 from hashlib import sha256
 from getpass import getpass

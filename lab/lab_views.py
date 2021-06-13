@@ -41,6 +41,14 @@ def result(test_id):
     return res
 
 
+def update_test_res(test_id, result: json):
+    """
+    result must be a json file
+    """
+    db_manager.update_json_content(table='tests', id=test_id, result=result)
+    return "Test Is Updated"
+
+
 def user_tests(user) -> List[tuple]:
     # it returns test.id, national_code, first_name, last_name, type, test_name, request_date, result_date
     tests = db_manager.read_user_tests(user)

@@ -60,7 +60,7 @@ menu_dic = {
                    "description": "register new test",
                    },
                   {"name": "update test",
-                   "function": Lab_view.update_test,
+                   "function": Lab_view.update_test_res,
                    "description": "operator update test",
                    },
                   {"name": "all tests",
@@ -78,7 +78,7 @@ menu_dic = {
              {"name": "doctor",
               "children": [
                   {"name": "update test",
-                   "function": Lab_view.update_test,
+                   "function": Lab_view.update_test_res,
                    "description": "doctor update test",
                    },
                   {"name": "all tests",
@@ -96,7 +96,7 @@ menu_dic = {
              {"name": "manager",
               "children": [
                   {"name": "confirm test",
-                   "function": Lab_view.update_test,
+                   "function": Lab_view.update_test_res,
                    "description": "manager confirm test",
                    },
                   {"name": "all tests",
