@@ -3,7 +3,7 @@ from hashlib import sha256
 
 from core.models import *
 from core.manager import *
-from core.utility import *
+from core.validators import CheckValid
 from typing import Optional, Literal
 import secrets
 import string
@@ -50,8 +50,8 @@ class Patient(User):
     _FILE = FileManager("Patient")
     patients = _FILE.read()
 
-    def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
-        super().__init__(first_name, last_name, national_code, phone, email, type_of_user=1,
+    def __init__(self, first_name, last_name, national_code, phone, password, email="", **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, password, email, type_of_user=1,
                          **extra_information)  # type_of_user=1 as patient
         self.__class__._FILE.create(str(self.type_of_user) + self.national_code, self)
         self.__class__.patients = self.__class__._FILE.read()
@@ -61,16 +61,16 @@ class Doctor(User):
     # sampler and check the tests
     expertise: str
 
-    def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
-        super().__init__(first_name, last_name, national_code, phone, email, type_of_user=2,
+    def __init__(self, first_name, last_name, national_code, phone, password, email="", **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, password, email, type_of_user=2,
                          **extra_information)  # type_of_user=2 as doctor
 
 
 class Operator(User):
     licence: str
 
-    def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
-        super().__init__(first_name, last_name, national_code, phone, email, type_of_user=3,
+    def __init__(self, first_name, last_name, national_code, phone, password, email="", **extra_information):
+        super().__init__(first_name, last_name, national_code, phone, password, email, type_of_user=3,
                          **extra_information)  # type_of_user=3 as operator
 
 

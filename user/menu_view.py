@@ -16,8 +16,6 @@ def register():
     national_code = input("enter your national code:")
     phone = input("enter your phone number:")
     email = input("enter your email(optional):") or None
-    # password = sha256(getpass(
-    #     "enter your password:").encode()).hexdigest()  # Commented During Developing. This Needs To BE Run From Command propmt
     password = input("enter your password:")
     user_type = input("enter your type:")
     user_type_id = db_manger.get_id('user_type', type=user_type)
@@ -43,7 +41,8 @@ def register():
 def login():
     user_name = input("enter your username (national_code):")
     password = input("enter your password:")
-    check_res = db_manger.check_record('users', national_code=user_name, password=password)
+    password_hashed = sha256(password.encode()).hexdigest()
+    check_res = db_manger.check_record('users', national_code=user_name, password=password_hashed)
     user = retrieve_user(check_res[0])
     return user if check_res else False
 
