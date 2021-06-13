@@ -7,7 +7,7 @@ from lab.models import CV19
 import core.manager as core_manager
 from core.utility import retrieve_user as retrieve_user
 
-u_manger = core_manager.DatabaseManager()
+db_manger = core_manager.DatabaseManager()
 
 
 def register():
@@ -18,38 +18,40 @@ def register():
     email = input("enter your email(optional):") or None
     # password = sha256(getpass(
     #     "enter your password:").encode()).hexdigest()  # Commented During Developing. This Needs To BE Run From Command propmt
-    password = "1234"  # it is just for test
-    gender = input("enter your gender(male or female):")
-    age = int(input("enter your  age:"))
-    blood_type = input("enter your blood type(A,B,AB or O) :")
-    user_patient = models.Patient(first_name=first_name, last_name=last_name, national_code=national_code, phone=phone,
-                                  password=password, email=email, gender=gender, age=age,
-                                  blood_type=blood_type)
-    u_manger.create(table="users", model=user_patient)
+    password = input("enter your password:")
+    user_type = input("enter your type:")
+    user_type_id = db_manger.get_id('user_type', type=user_type)
+    extra_data = (db_manger.read('user_type', row_id=user_type_id))[0][1]
+    extra_data = json.dumps(extra_data)
+    extra_data_dict = json.loads(extra_data)
+    for key, value in extra_data_dict.items():
+        value = input(f"enter your {key}:")
+        extra_data_dict.update({f"{key}": f"{value}"})
+    if user_type == 'patient':
+        user = models.Patient(first_name=first_name, last_name=last_name, national_code=national_code, phone=phone,
+                              password=password, email=email, **extra_data_dict)
+    elif user_type == 'doctor':
+        user = models.Doctor(first_name=first_name, last_name=last_name, national_code=national_code, phone=phone,
+                             password=password, email=email, **extra_data_dict)
+    elif user_type == 'operator':
+        user = models.Operator(first_name=first_name, last_name=last_name, national_code=national_code, phone=phone,
+                               password=password, email=email, **extra_data_dict)
+    db_manger.create(table="users", model=user)
     print("Congrats. Your Account Is Created")
 
 
 def login():
     user_name = input("enter your username (national_code):")
     password = input("enter your password:")
-    check_res = u_manger.check_record('users', national_code=user_name, password=password)
+    check_res = db_manger.check_record('users', national_code=user_name, password=password)
     user = retrieve_user(check_res[0])
     return user if check_res else False
 
 
 def repr_all_patients():
-    users = u_manger.read_all("users")
+    users = db_manger.read_all("users")
     for user in users:
         print(user)
-
-
-#     patients = models.Patient.patients
-#     for i in range(len(patients)):
-#         print(f"""
-# {i + 1}-
-# <first name:{patients[i]["first_name"]},
-#  last  name:{patients[i]["last_name"]}>
-# """)
 
 
 def repr_all_doctors():
