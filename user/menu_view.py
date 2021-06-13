@@ -6,6 +6,7 @@ from getpass import getpass
 import user.models as models
 from lab.models import CV19
 import core.manager as core_manager
+from core.utility import retrieve_user as retrieve_user
 
 u_manger = core_manager.DatabaseManager()
 
@@ -35,7 +36,8 @@ def login():
     user_name = input("enter your username (national_code):")
     password = input("enter your password:")
     check_res = u_manger.check_record('users', national_code=user_name, password=password)
-    return check_res[0][-1] if check_res else False
+    user = retrieve_user(check_res[0])
+    return user if check_res else False
 
 
 def repr_all_patients():

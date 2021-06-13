@@ -1,7 +1,8 @@
+import json
 import re
 from typing import Optional, Literal, Dict, Union
 import time
-
+import user.models as models
 
 
 def inputer(txt: str, type_str: str, is_optional: str = False,
@@ -37,13 +38,23 @@ class CheckValid:
     @classmethod
     def phone_number(cls, phone_number: str):
         return True if re.search(cls.__phone_number_regex, phone_number) else False
+
     @classmethod
-    def username(cls, username:str):
+    def username(cls, username: str):
         pass
 
 
 def login_authorization():
     print("login_authorization")
     time.sleep(1)
-    #todo : this should return the type of user. Type of user is str type like "patient"
+    # todo : this should return the type of user. Type of user is str type like "patient"
     return True
+
+
+def retrieve_user(data: tuple) -> models.User:
+    # extracting extra_info from json file
+    extra_info = json.loads(json.dumps(data[7]))
+    user = models.Patient(first_name=data[0].strip(), last_name=data[1].strip(), national_code=data[2].strip(),
+                          phone=data[3].strip(), email=data[4], password=data[5].strip(), **extra_info)
+    print(vars(user))
+    return user
