@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}نتیجه آزمایش{% endblock %}
+{% block content %}
+    <div class="w-7/12 bg-white mx-auto">
+        <h1 class="block mt-8 text-4xl rounded bg-green-400 text-white font-bold py-4 px-8 text-center">نتیجه آزمایش
+            شما</h1>
+        <hr class="opacity-40 my-4 w-full">
+        <p class="bg-grey-200 text-black p-8 rounded-b-r rounded-b-l">
+            {% for k, v in res.items() %}
+                <b>{{ k }} : </b><span>{{ v }}</span><br>
+            {% endfor %}
+        </p>
+    </div>
+{% endblock %}
