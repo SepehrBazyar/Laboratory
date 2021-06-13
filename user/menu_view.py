@@ -31,6 +31,13 @@ def register():
     # todo : we agreed to use national code ad username, so it should be considered in login
 
 
+def login():
+    user_name = input("enter your username (national_code):")
+    password = input("enter your password:")
+    check_res = u_manger.check_record('users', national_code=user_name, password=password)
+    return check_res[0][-1] if check_res else False
+
+
 def repr_all_patients():
     users = u_manger.read("users")
     for user in users:
