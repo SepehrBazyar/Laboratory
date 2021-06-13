@@ -3,6 +3,7 @@ from hashlib import sha256
 
 from core.models import *
 from core.manager import *
+from core.utility import *
 from typing import Optional, Literal
 import secrets
 import string
@@ -11,25 +12,33 @@ import string
 class User(BaseModels):
     first_name: str
     last_name: str
+    national_code: str
     phone: str
-    email: str = None
     password: str
+    email: str = None
+    type_of_user: str
     extra_information: dict
 
     # TODO : username
-    def __init__(self, first_name, last_name, national_code, phone, email, password, type_of_user, **extra_information):
+    def __init__(self, first_name, last_name, national_code, phone, password, email, type_of_user, **extra_information):
         self.first_name = first_name
         self.last_name = last_name
         self.national_code = national_code
+        assert CheckValid.phone_number(phone)
         self.phone = phone
+        self.password = sha256(password.encode()).hexdigest()
+        if email: assert CheckValid.email(email)
         self.email = email
+<<<<<<< HEAD
         self.password = password
+=======
+>>>>>>> flask-server
         self.type_of_user = type_of_user
         self.extra_information = json.dumps(extra_information)
 
     # TODO: ask about pass private from mr.tehrani
-    def get_password(self):
-        return self.password
+    # def get_password(self):
+    #     return self.password
 
     def __repr__(self):
         return f"""
@@ -43,13 +52,27 @@ class Patient(User):
     age: int
     blood_type: Optional[Literal["O", "A", "B", "AB"]]
     _FILE = FileManager("Patient")
-    patients = list(_FILE.read().values())
+    patients = _FILE.read()
 
+<<<<<<< HEAD
     def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
         super().__init__(first_name, last_name, national_code, phone, email, type_of_user=1,
                          **extra_information)  # type_of_user=1 as patient
         self.__class__._FILE.create(self.national_code, self)
         self.__class__.patients = list(self.__class__._FILE.read().values())
+=======
+    def __init__(self, first_name, last_name, national_code, phone, password, gender, age, blood_type=None, email=None):
+        self.gender = gender
+        self.age = age
+        self.blood_type = blood_type
+        extra_information = {"gender": self.gender,
+                             "age": self.age, "blood_type": self.blood_type}
+        super().__init__(first_name, last_name, national_code, phone, password, email,
+                         type_of_user="1", **extra_information)  # type_of_user=1 as patient
+        # TODO: we should change id for creating file from phone to national_code
+        self.__class__._FILE.create("1" + self.national_code, self)
+        self.__class__.patients = self.__class__._FILE.read()
+>>>>>>> flask-server
 
 
 class Doctor(User):
@@ -92,7 +115,8 @@ class Admin:  # Site Admin
     @staticmethod
     def __pass_generator():
         alphabet = string.ascii_letters + string.digits
-        password_local = ''.join(secrets.choice(alphabet) for i in range(10))  # for a 10-character password
+        password_local = ''.join(secrets.choice(alphabet)
+                                 for i in range(10))  # for a 10-character password
         return password_local
 
     @property

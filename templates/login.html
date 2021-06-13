@@ -1,43 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Login</title>
-        <style>
-            input , button {
-                width: 100%;
-            }
-            form > div {
-                width: 576px;
-                border: 3px solid black;
-                padding: 1rem 2rem 1rem 1rem;
-                margin: auto;
-            }
-            @media only screen and (max-width: 768px) {
-                input , button {
-                    margin: auto;
-                }
-                form > div {
-                    width: 85%;
-                    border: none;
-                    padding: 1rem 1.5rem 1rem 0.5rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            <form>
-                <h1 style="text-align: center;">Login</h1>
-                <div>
-                    <label for="uname"><b>Username</b></label><br>
-                    <input type="text" placeholder="Enter Username" name="uname" required><br>
-                    <label for="passwd"><b>Password</b></label><br>
-                    <input type="password" placeholder="Enter Password" name="passwd" minlength="4" required>
-                    <br><br><button type="submit">Login</button>
+{% extends "base.html" %}
+{% block title %}ورود{% endblock %}
+{% block extra_style %}
+.valid-feedback,
+.invalid-feedback {
+text-align: right;
+}
+
+.card {
+margin: 0.5rem auto;
+<!-- box-shadow: 0 0 5px 0 ;
+background: inherit;
+backdrop-filter: blur(30px); -->
+}
+
+.card-body {
+margin: 50px auto;
+padding: 0 1rem;
+}
+
+.custom-control.custom-checkbox {
+padding-left: 0;
+text-align: right;
+}
+
+label.custom-control-label {
+position: relative;
+padding-right: 1.5rem;
+}
+
+label.custom-control-label::before,
+label.custom-control-label::after {
+right: 0;
+left: auto;
+}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="card-header">
+                <h1><strong>ورود</strong></h1>
+            </div>
+            <div class="card-body">
+                <div class="form-group was-validated">
+                    <!-- <label for="national"><i class="gb gb_nature_people"></i></label> -->
+                    <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
+                        minlength="10" maxlength="10" required>
+                    <div class="valid-feedback">صحیح</div>
+                    <div class="invalid-feedback">نامعتبر(دقیقا &#1776 &#1777 رقم)</div>
                 </div>
-            </form>
-        </div>
-    </body>
-</html>
+                <div class="form-group was-validated">
+                    <!-- <label for="password"><i class="gb gb_vpn_key"></i></label> -->
+                    <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
+                        required>
+                    <div class="valid-feedback">صحیح</div>
+                    <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
+                </div>
+                <!-- <select name="post" class="custom-select mb-3">
+                        <option selected>لطفا سِمَت خود را انتخاب نمایید</option>
+                        <option value="patient">بیمار</option>
+                        <option value="doctor">دکتر</option>
+                    </select> -->
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                    <label class="custom-control-label" for="remember">مرا بخاطر بسپار</label>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-submit">ورود</button>
+                    </div>
+                    <div class="col">
+                        <button type="reset" class="btn btn-reset">پاکسازی</button>
+                    </div>
+                </div>
+                <center>
+                    <a href="{{ url_for('register') }}">کاربر جدید هستید؟ ثبت نام</a>
+                </center>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
