@@ -26,13 +26,9 @@ class User(BaseModels):
         self.national_code = national_code
         assert CheckValid.phone_number(phone)
         self.phone = phone
-        self.password = sha256(password.encode()).hexdigest()
         if email: assert CheckValid.email(email)
         self.email = email
-<<<<<<< HEAD
-        self.password = password
-=======
->>>>>>> flask-server
+        self.password = sha256(password.encode()).hexdigest()
         self.type_of_user = type_of_user
         self.extra_information = json.dumps(extra_information)
 
@@ -54,25 +50,11 @@ class Patient(User):
     _FILE = FileManager("Patient")
     patients = _FILE.read()
 
-<<<<<<< HEAD
     def __init__(self, first_name, last_name, national_code, phone, email="", **extra_information):
         super().__init__(first_name, last_name, national_code, phone, email, type_of_user=1,
                          **extra_information)  # type_of_user=1 as patient
-        self.__class__._FILE.create(self.national_code, self)
-        self.__class__.patients = list(self.__class__._FILE.read().values())
-=======
-    def __init__(self, first_name, last_name, national_code, phone, password, gender, age, blood_type=None, email=None):
-        self.gender = gender
-        self.age = age
-        self.blood_type = blood_type
-        extra_information = {"gender": self.gender,
-                             "age": self.age, "blood_type": self.blood_type}
-        super().__init__(first_name, last_name, national_code, phone, password, email,
-                         type_of_user="1", **extra_information)  # type_of_user=1 as patient
-        # TODO: we should change id for creating file from phone to national_code
-        self.__class__._FILE.create("1" + self.national_code, self)
+        self.__class__._FILE.create(str(self.type_of_user) + self.national_code, self)
         self.__class__.patients = self.__class__._FILE.read()
->>>>>>> flask-server
 
 
 class Doctor(User):

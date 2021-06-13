@@ -42,7 +42,7 @@ create_table_queries.append("""CREATE TABLE users (
             national_code char(10) UNIQUE NOT NULL , 
             phone CHAR(11) NOT NULL,
             email CHAR(100),
-            password CHAR(50) NOT NULL,
+            password CHAR(100) NOT NULL,
             type_id INT NOT NULL,
             extra_data JSON NOT NULL,
             id SERIAL PRIMARY KEY,
