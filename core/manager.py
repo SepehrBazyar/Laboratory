@@ -106,23 +106,10 @@ class FileManager(BaseManager):
 
 class DatabaseManager(BaseManager):
 
-    def get_id(self, table, **kwargs):
-        """kwargs should include table name and parameter=value that you have
-        Example: users, national-code=11111"""
-        column = list(kwargs.keys())[0]
-        value = kwargs[column]
-        condition = f"{table}.{column}='{value}'"
-        query = f"SELECT {table}.id from {table} where {condition};"
-        with self.access_database() as lab_cursor:
-            lab_cursor.execute(query)
-            return lab_cursor.fetchone()[0]
-
-    def normalizer(self):
-        pass
-
     def create(self, table, model):
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
+        # todo for tests %s %s is different
         query = f"INSERT INTO {table} VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
         self.send_query(query, dict_values)
 
@@ -149,6 +136,28 @@ class DatabaseManager(BaseManager):
         query = f"DELETE FROM {table} where id={row_id}"
         self.send_query(query)
 
+    def get_id(self, table, **kwargs):
+        """kwargs should include table name and one column=amount for searching
+        Example: users, national-code=11111"""
+        column = list(kwargs.keys())[0]
+        value = kwargs[column]
+        condition = f"{table}.{column}='{value}'"
+        query = f"SELECT {table}.id from {table} where {condition};"
+        with self.access_database() as lab_cursor:
+            lab_cursor.execute(query)
+            return lab_cursor.fetchone()[0]
+
+    def check_record(self, table, **kwargs):
+        """kwargs should include table name and one or more column=amount for checking
+                Example: users, national-code=11111, password='12345'"""
+        condition_string = ''
+        for key, value in kwargs.items():
+            condition_string += f"{key}='{value}' and "
+        query = f"SELECT * from {table} where {condition_string[:-5]};"
+        with self.access_database() as lab_cursor:
+            lab_cursor.execute(query)
+            return lab_cursor.fetchall()
+
     def send_query(self, query, data=None):
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query, data)
@@ -161,3 +170,6 @@ class DatabaseManager(BaseManager):
         curs.close()
         conn.commit()
         conn.close()
+
+    def normalizer(self):
+        pass
