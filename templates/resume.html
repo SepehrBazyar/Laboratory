@@ -14,12 +14,12 @@
 <div class="absolute top-0 bottom-0 w-full md:w-10/10 mx-auto gap-0 grid grid-cols-10">
     <div class="sm:col-span-4 bg-purple-700 col-span-10 p-8 text-center relative">
         <a href="#" class="log-out transition-all border-4 border-red-500 hover:bg-red-600 hover:border-red-700 mx-auto block rtl text-xl absolute top-8 hover:left-0 text-white font-bold bg-red-500 rounded-tr-full rounded-br-full p-4" style="left: -178px;"><i class="gb gb_highlight_off ml-2" style="font-size:35px"></i>خارج شدن از حساب</a>
-        <img class="rounded-full border-8 mb-8 inline" src="https://www.datocms-assets.com/36798/1617145265-9918912.jpg?crop=focalpoint&fit=crop&h=256&w=256" alt="Hasan Rouhani">
-        <b class="block mb-8 text-4xl sm:text-2xl lg:text-4xl text-white">نام و نام خانوادگی<i class="gb ml-2 gb_face text-white"></i></b>
+        <!-- <img class="rounded-full border-8 mb-8 inline" src="https://www.datocms-assets.com/36798/1617145265-9918912.jpg?crop=focalpoint&fit=crop&h=256&w=256" alt="Hasan Rouhani"> -->
+        <b class="block mb-8 text-4xl sm:text-2xl lg:text-4xl text-white">{{ data.first_name }} {{ data.last_name }}<i class="gb ml-2 gb_face text-white"></i></b>
         <hr class="opacity-50">
-        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-8"><i class="gb gb_phone ml-2"></i>شماره تماس : <span>09135551460</span></span>
-        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_account_box ml-2"></i>کد ملی : <span>5120078152</span></span>
-        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_email ml-2"></i>ایمیل : <span>ir.mrking@yahoo.com</span></span>
+        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-8"><i class="gb gb_phone ml-2"></i>شماره تماس : <span>{{ data.phone }}</span></span>
+        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_account_box ml-2"></i>کد ملی : <span>{{ data.national_code }}</span></span>
+        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_email ml-2"></i>ایمیل : <span>{{ data.email }}</span></span>
         <form class="bg-black rtl bg-opacity-40 font-bold mt-8 p-4 md:p-8 grid gap-4 xl:gap-8 grid-cols-6 rounded-lg w-full" action="">
             <label for="ttype" class="text-center text-yellow-400 block text-xl md:text-2xl col-span-6 mb-0 ltr">ثبت آزمایش جدید<i class="gb gb_add_box ml-2"></i></label>
             <select id="ttype" name="test_type" class="rounded transition-all py-2 px-4 col-span-6 lg:col-span-4 w-full">

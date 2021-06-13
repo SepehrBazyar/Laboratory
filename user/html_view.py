@@ -27,7 +27,7 @@ def register():
                         _vars.get("username").split(" ", 1)[1],
                         _vars.get("national"), _vars.get("phone"),
                         _vars.get("password"), "male", 20,
-                        "O", _vars.get("email") or None)
+                        "O", _vars.get("email"))
             except AssertionError:
                 return render_template("register.html")
             else:
@@ -51,8 +51,19 @@ def login():
                 html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
                 resp = make_response(html_str)
                 if _vars.get('remember'):
-                    resp.set_cookie('_ID', '1' + _vars.get('national'), max_age=timedelta(weeks=1))
+                    resp.set_cookie(
+                        '_ID', '1' + _vars.get('national'), max_age=timedelta(weeks=1))
                 else:
                     resp.set_cookie('_ID', '1' + _vars.get('national'))
                 return resp
             return render_template("login.html")
+
+
+def logout():
+    resp = make_response(render_template("login.html"))
+    try:
+        resp.delete_cookie('_ID')
+    except:
+        pass
+    finally:
+        return resp
