@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>پروفابل من</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <link rel="stylesheet" href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
+    <style>
+        * {
+            font-family: Vazir, sans-serif;
+        }
+
+        .rtl {
+            direction: rtl !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
+</head>
+<body>
+<div class="absolute top-0 bottom-0 w-full md:w-10/10 mx-auto gap-0 grid grid-cols-10">
+    <div class="sm:col-span-4 bg-purple-700 col-span-10 p-8 text-center">
+        <img class="rounded-full border-8 mb-8 inline" src="https://www.datocms-assets.com/36798/1617145265-9918912.jpg?crop=focalpoint&fit=crop&h=256&w=256" alt="Hasan Rouhani">
+        <b class="block mb-8 text-4xl sm:text-2xl lg:text-4xl text-white">نام و نام خانوادگی<i class="gb ml-2 gb_face text-white"></i></b>
+        <hr class="opacity-50">
+        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-8"><i class="gb gb_phone ml-2"></i>شماره تماس : <span>09135551460</span></span>
+        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_account_box ml-2"></i>کد ملی : <span>5120078152</span></span>
+        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_email ml-2"></i>ایمیل : <span>ir.mrking@yahoo.com</span></span>
+        <form class="bg-black bg-opacity-40 font-bold mt-8 p-4 pb-8 rounded-lg w-full" action="">
+            <label for="ttype" class="text-center text-yellow-400 block text-2xl mb-6">ثبت آزمایش جدید</label>
+            <button type="submit" class="bg-yellow-400 transition-all rounded py-2 px-4 w-4/12 mr-4 text-white border-2 border-yellow-400 hover:bg-yellow-500 hover:border-yellow-600 font-bold">ثبت <i class="gb gb_done"></i></button>
+            <select id="ttype" name="test_type" class="rounded transition-all py-2 px-4 w-6/12">
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="covid" selected disabled hidden>انتخاب کنید</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="covid">کرونا</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="ccv">خون</option>
+                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="etiad">اعتیاد</option>
+            </select>
+        </form>
+    </div>
+    <div class="sm:col-span-6 col-span-10 lg:pr-18 p-8 text-center">
+        <h1 class="rtl text-4xl mb-4 text-red-600 text-center sm:text-right"><i class="gb gb_receipt ml-2 text-red-800"></i>آزمایش ها : </h1>
+        <div class="percent-main">
+            <span>Sympathetic</span>
+            <i class="percent_bar">0%</i>
+        </div>
+        <div class="percent-main">
+            <span>Damage</span>
+            <i class="percent_bar">99%</i>
+        </div>
+    </div>
+</div>
+</body>
+</html>
