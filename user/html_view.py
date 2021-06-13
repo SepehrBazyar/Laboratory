@@ -118,3 +118,12 @@ def new_test():
         register_test(test_name, user)
         sleep(3)
     return redirect('/login')
+
+
+def test_result():
+    test_id = request.args.get('test_id')
+    cookies = request.cookies
+    if cookies.get('_ID'):
+        res = result(test_id)
+        return render_template('res.html', res=res)
+    return redirect('/login')
