@@ -158,6 +158,19 @@ class DatabaseManager(BaseManager):
             lab_cursor.execute(query)
             return lab_cursor.fetchall()
 
+    def read_user_tests(self, user):
+        national_code = user.national_code
+        condition = f"national_code='{national_code}'"
+        query = f"""select tests.id, {national_code}, first_name, last_name, type, test_name, request_date, result_date from tests
+                    inner join users on users.id = tests.user_id
+                    inner join test_info on test_info.id = tests.test_info_id
+                    inner join user_type on user_type.id = users.type_id
+                    where {condition};
+                    ;"""
+        with self.access_database() as lab_cursor:
+            lab_cursor.execute(query)
+            return lab_cursor.fetchall()
+
     def read_all(self, table):
         query = f"SELECT * FROM {table}"
         with self.access_database() as lab_cursor:
