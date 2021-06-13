@@ -109,8 +109,9 @@ class DatabaseManager(BaseManager):
     def create(self, table, model):
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
+        value_num = '%s, ' * len(dict_values)
         # todo for tests %s %s is different
-        query = f"INSERT INTO {table} VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+        query = f"INSERT INTO {table} VALUES ({value_num[:-2]});"
         self.send_query(query, dict_values)
 
     def read(self, table):
