@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About me !</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            width: 1024px;
+            margin: 0 auto;
+            height: max-content;
+        }
+
+        .left-col {
+            width: 424px;
+            background-color: #5755DA;
+            color: #fff;
+            padding: 25px 45px;
+        }
+
+        .left-col > img {
+            width: 300px;
+            height: 300px;
+            display: block;
+            border-radius: 50%;
+            border: 10px solid;
+            margin: 0 auto;
+        }
+
+        .left-col > div {
+            margin-top: 20px;
+        }
+
+        .left-col > div > b {
+            text-align: left;
+            font-family: Monospace, serif;
+            font-weight: bolder;
+            font-size: 45px;
+
+        }
+
+        .left-col > div > span {
+            text-align: left;
+            display: block;
+            font: 25px Tahoma, sans-serif;
+            opacity: 0.5;
+        }
+
+        .left-col > p {
+            font: 19px monospace;
+        }
+
+        .left-col > .social-icons {
+            margin: 50px auto;
+        }
+
+        .left-col > .social-icons > a {
+            color: #fff;
+            font-size: 28px;
+            padding-left: 43px;
+        }
+
+        .left-col > .social-icons > a:nth-of-type(1){
+            padding-left: 0;
+        }
+
+        .left-col > a {
+            text-transform: uppercase;
+            display: block;
+            color: #efe;
+            font: 25px 'Ubuntu', sans-serif;
+            margin: 30px 0;
+        }
+
+        .right-col {
+            width: 600px;
+            background-color: #eee;
+            padding: 25px 100px;
+        }
+
+        .right-col > h1 {
+            margin-top: 20px;
+            color: #EA547F;
+            text-transform: uppercase;
+            font: bolder 30px sans-serif;
+        }
+
+        .right-col > p {
+            margin-top: 40px;
+            padding: 10px 0;
+            font: 23px sans-serif;
+            line-height: 1.8em;
+        }
+
+        .right-col > .tel-me {
+            margin: 50px 0;
+        }
+
+        .right-col > .tel-me > span {
+            display: block;
+            margin-top: 1em;
+            font: 20px sans-serif;
+        }
+
+        .right-col > .tel-me > span > b {
+            font-family: Monospace, sans-serif;
+        }
+
+        .percent-main {
+            margin-top: 20px;
+            font-size: 20px;
+            width: 49%;
+            display: inline-block;
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+        }
+
+        .percent_bar {
+            text-align: right;
+            float: right;
+            margin-right: 10px;
+            color: #a5a5a5;
+            font-style: normal;
+        }
+    </style>
+    <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="left-col">
+        <img src="https://www.datocms-assets.com/36798/1617145265-9918912.jpg?crop=focalpoint&fit=crop&h=256&w=256" alt="Hasan Rouhani">
+        <div>
+            <b>{{ data.first_name }}{{ data.last_name }}</b>
+            <span>Doctor of Corruption</span>
+            <span>PhD in Key Manufacturing</span>
+        </div>
+
+        <div class="social-icons">
+            <a href="#"><i class="gb gb_facebook"></i></a>
+            <a href="#"><i class="gb gb_twitter"></i></a>
+            <a href="#"><i class="gb gb_whatsapp"></i></a>
+            <a href="#"><i class="gb gb_instagram"></i></a>
+            <a href="#"><i class="gb gb_telegram"></i></a>
+        </div>
+
+        <a href="#">about me</a>
+        <a href="#">expereince</a>
+        <a href="#">education</a>
+    </div>
+    <div class="right-col">
+        <h1>&#0147 About Me &#0148</h1>
+        <p>
+            "من هم امروز صبح فهمیدم اینطوریه"
+            adipisicing elit. Fuga, nihil quis?
+            Aliquid consequuntur cumque, eius
+            exercitationem illo, in laboriosam magnam
+            nemo numquam pariatur praesentium quidem
+            repellat sint soluta velit voluptas.
+        </p>
+
+        <div class="tel-me">
+            <span><b>Birthday:</b>August 14, 1982</span>
+            <span><b>Location:</b> Central Main Rd, Australia</span>
+            <span><b>Email:</b>{{ data.email }}</span>
+            <span><b>Phone:</b>{{ data.phone }}</span>
+        </div>
+
+        <div class="percent-main">
+            <span>Sympathetic</span>
+            <i class="percent_bar">0%</i>
+        </div>
+        <div class="percent-main">
+            <span>Damage</span>
+            <i class="percent_bar">99%</i>
+        </div>
+    </div>
+</div>
+</body>
+</html>

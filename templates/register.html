@@ -1,35 +1,121 @@
 <!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Register Form</title>
-    </head>
-    <body>
-    <center>
-        <b>Register Form</b>
-        <hr>
-        <form action="#" method="post">
-            <label for="username">Username : </label>
-            <input id="username" type="text" placeholder="Enter Username" name="username" required><br>
+<html lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ثبت نام</title>
+    <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+</head>
+<style>
 
-            <label for="password">Password : </label>
-            <input id="password" type="password" placeholder="Enter Password" name="password" required><br>
+    html {
+        background: #fafafa;
+    }
 
-            <label for="phone">Phone : </label>
-            <input id="phone" type="tel" placeholder="Enter Phonenumber" name="phone" required><br>
+    *, body {
+        direction: rtl;
+        font-family: Yekan, sans-serif;
+        padding: 0;
+        margin: 0;
+        font-size: 18px;
+        box-sizing: border-box;
+    }
 
-            <label for="national">National Code : </label>
-            <input id="national" type="text" placeholder="Enter National Code" name="national" required><br>
+    .center {
+        margin: 0 auto;
+        text-align: center;
+    }
 
-            <label for="email">Email : </label>
-            <input id="email" type="text" placeholder="Enter Email Address" name="email" required><br>
+    .btn {
+        min-width: 110px;
+        background: #2196f3;
+        color: white;
+        outline: none;
+        padding: 5px 20px;
+        text-align: center;
+        margin: 40px auto;
+        border-radius: 5px;
+        border: 2px solid #018bdb;
+        text-shadow: 0 1px 0 #000;
+        box-shadow: 0 0 5px inset #777, 0 0 10px #777;
+    }
 
-            <!--   TODO: ADD CAPTCHA CODE   -->
+    .btn-submit {
+        background: #3bbf40;
+        border-color: #26863b;
+        margin:0 50px 0 38px;
+    }
 
-            <input type="submit" value="Sign up">
-            <input type="reset" value="Reset">
-            </form>
-        </center>
-    </body>
+    .btn-reset {
+        background: #ff2222;
+        border-color: #e32e00;
+    }
+
+    .btn:hover {
+        box-shadow: 0 0 10px #777;
+        cursor: pointer;
+    }
+
+    body > strong {
+        display: block;
+        color: #018bdb;
+        margin:45px 45px 20px 20px;
+        font-size: 35px;
+        text-align: center;
+        text-shadow: 0 1px 0 #000;
+    }
+
+    input {
+        box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
+        border-radius: 5px;
+        outline: none;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border: 1px solid #eee;
+    }
+
+    label {
+        margin-top: 10px;
+    }
+
+    label > i {
+        text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
+    }
+
+    form > div > label {
+        border-radius: 0 5px 5px 0;
+        color: #018bdb;
+        padding: 0 10px;
+        text-align: center;
+        font-size: 28px;
+    }
+
+</style>
+<body>
+<strong class="">ثبت نام</strong>
+<form action="{{ url_for('register') }}" method="post">
+    <div class="center">
+        <label for="username"><i class="gb gb_assignment_ind"></i></label>
+        <input id="username" type="text" placeholder="نام و نام خانوادگی" name="username" required><br>
+
+        <label for="password"><i class="gb gb_vpn_key"></i></label>
+        <input id="password" type="password" placeholder="رمز عبور" name="password" required><br>
+
+        <label for="phone"><i class="gb gb_phone"></i></label>
+        <input id="phone" type="tel" placeholder="شماره تماس" name="phone" required><br>
+
+        <label for="national"><i class="gb gb_nature_people"></i></label>
+        <input id="national" type="text" placeholder="شماره ملی" name="national" required><br>
+
+        <label for="email"><i class="gb gb_email"></i></label>
+        <input id="email" type="text" placeholder="صندوق پستی (اختیاری)" name="email"><br>
+
+        <!--   TODO: ADD CAPTCHA CODE   -->
+
+        <input class="btn btn-submit" type="submit" value="تکمیل">
+        <input class="btn btn-reset" type="reset" value="پاکسازی">
+    </div>
+</form>
+</body>
 </html>
