@@ -1,6 +1,11 @@
+from typing import List
+
 from user import models
 from lab.models import CV19
 from time import sleep
+from core.manager import DatabaseManager
+
+db_manager = DatabaseManager()
 
 Patient_list = []
 Tests = []
@@ -35,6 +40,14 @@ def result():
 
 def update_test():
     pass
+
+
+def user_tests(user) -> List[tuple]:
+    # it returns test.id, national_code, first_name, last_name, type, test_name, request_date, result_date
+    tests = db_manager.read_user_tests(user)
+    for i in range(len(tests)):
+        tests[i] = list(map(lambda item: item.strip() if type(item) == str else item, tests[i]))
+    return tests
 
 
 def repr_all_test():

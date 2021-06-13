@@ -41,7 +41,7 @@ def login():
 
 
 def repr_all_patients():
-    users = u_manger.read("users")
+    users = u_manger.read_all("users")
     for user in users:
         print(user)
 
