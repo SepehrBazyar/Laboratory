@@ -109,6 +109,7 @@ class Admin:  # Site Admin
     def password(self):
         return self._password
 
+
 # todo : postponed
 # class Manager(User):
 #     educational_degree: str
@@ -123,3 +124,9 @@ class Admin:  # Site Admin
 # TODO : postponed
 # class Sampler(User):
 #     pass
+
+
+class UserType:
+    def __init__(self, user_type, **user_extra_data):
+        self.type = user_type
+        self.extra_data = json.dumps(user_extra_data)
