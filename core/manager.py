@@ -18,7 +18,7 @@ class BaseManager(ABC):
     def create(self, table, model): pass
 
     @abstractmethod
-    def read(self, table): pass
+    def read(self, table, row_id): pass
 
     @abstractmethod
     def update(self, table, **kwargs): pass
@@ -110,12 +110,11 @@ class DatabaseManager(BaseManager):
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
         value_num = '%s, ' * len(dict_values)
-        # todo for tests %s %s is different
         query = f"INSERT INTO {table} VALUES ({value_num[:-2]});"
         self.send_query(query, dict_values)
 
-    def read(self, table):
-        query = f"SELECT * FROM {table}"
+    def read(self, table, row_id):
+        query = f"SELECT * FROM {table} where id={row_id}"
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query)
             return lab_cursor.fetchall()
@@ -155,6 +154,12 @@ class DatabaseManager(BaseManager):
         for key, value in kwargs.items():
             condition_string += f"{key}='{value}' and "
         query = f"SELECT * from {table} where {condition_string[:-5]};"
+        with self.access_database() as lab_cursor:
+            lab_cursor.execute(query)
+            return lab_cursor.fetchall()
+
+    def read_all(self, table):
+        query = f"SELECT * FROM {table}"
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query)
             return lab_cursor.fetchall()
