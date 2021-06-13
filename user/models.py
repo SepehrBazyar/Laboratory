@@ -26,9 +26,10 @@ class User(BaseModels):
         self.national_code = national_code
         assert CheckValid.phone_number(phone)
         self.phone = phone
-        if email: assert CheckValid.email(email)
+        # print(type(email), email)
+        # if email: assert CheckValid.email(email)
         self.email = email
-        self.password = sha256(password.encode()).hexdigest()
+        self.password = password
         self.type_of_user = type_of_user
         self.extra_information = json.dumps(extra_information)
 

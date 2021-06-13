@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ثبت نام</title>
+    <link rel="stylesheet" href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+</head>
+<style>
+
+    html {
+        background: #fafafa;
+    }
+
+    *, body {
+        direction: rtl;
+        font-family: Yekan, sans-serif;
+        padding: 0;
+        margin: 0;
+        font-size: 18px;
+        box-sizing: border-box;
+    }
+
+    .center {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .btn {
+        min-width: 110px;
+        background: #2196f3;
+        color: white;
+        outline: none;
+        padding: 5px 20px;
+        text-align: center;
+        margin: 40px auto;
+        border-radius: 5px;
+        border: 2px solid #018bdb;
+        text-shadow: 0 1px 0 #000;
+        box-shadow: 0 0 5px inset #777, 0 0 10px #777;
+    }
+
+    .btn-submit {
+        background: #3bbf40;
+        border-color: #26863b;
+        margin: 0 50px 0 38px;
+    }
+
+    .btn-reset {
+        background: #ff2222;
+        border-color: #e32e00;
+    }
+
+    .btn:hover {
+        box-shadow: 0 0 10px #777;
+        cursor: pointer;
+    }
+
+    body > strong {
+        display: block;
+        color: #018bdb;
+        margin: 45px 45px 20px 20px;
+        font-size: 35px;
+        text-align: center;
+        text-shadow: 0 1px 0 #000;
+    }
+
+    input {
+        box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
+        border-radius: 5px;
+        outline: none;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border: 1px solid #eee;
+    }
+
+    label {
+        margin-top: 10px;
+    }
+
+    label > i {
+        text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
+    }
+
+    form > div > label {
+        border-radius: 0 5px 5px 0;
+        color: #018bdb;
+        padding: 0 10px;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    .age_field {
+        width: 260px;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+</style>
+<body>
+<strong class="">ثبت نام</strong>
+<form action="{{ url_for('register') }}" method="post">
+    <div class="center">
+        <label for="doctor" onclick="doct()">دکتر</label>
+        <input id="doctor" name="user_type" value="doctor" type="radio" onclick="doct()">
+
+        <label for="patient" onclick="pati()">مریض</label>
+        <input id="patient" name="user_type" checked value="patient" type="radio" onclick="pati()">
+
+        <label for="operator" onclick="oper()">اپراتور</label>
+        <input id="operator" name="user_type" value="operator" type="radio" onclick="oper()"><br><br>
+
+        <label for="username"><i class="gb gb_assignment_ind"></i></label>
+        <input id="username" type="text" placeholder="نام و نام خانوادگی" name="username" required><br>
+
+        <label for="password"><i class="gb gb_vpn_key"></i></label>
+        <input id="password" type="password" placeholder="رمز عبور" name="password" required><br>
+
+        <label for="phone"><i class="gb gb_phone"></i></label>
+        <input id="phone" type="tel" placeholder="شماره تماس" name="phone" required><br>
+
+        <label for="national"><i class="gb gb_nature_people"></i></label>
+        <input id="national" type="text" placeholder="شماره ملی" name="national" required><br>
+
+        <label for="email"><i class="gb gb_email"></i></label>
+        <input id="email" type="text" placeholder="صندوق پستی (اختیاری)" name="email"><br>
+
+        <!-- doctor -->
+        <label class="dociClass hidden" for="expertise"><i class="gb gb_assignment"></i></label>
+        <input class="dociClass hidden" id="expertise" type="text" placeholder="مدرک تخصص دکتر" name="expertise">
+        <br class="dociClass hidden">
+        <!-- doctor -->
+
+        <!-- patient -->
+        <label class="patiClass" for="age"><i class="gb gb_data_usage"></i></label>
+        <input class="patiClass age_field" id="age" type="number" min="0" max="180" placeholder="سن بیمار" name="age">
+        <br class="patiClass">
+
+        <label class="patiClass" for="age"><i class="gb gb_broken_image"></i></label>
+        <input class="patiClass" id="age" type="text" min="0" max="180" placeholder="گروه خونی" name="age">
+        <br class="patiClass">
+
+        <label class="patiClass" for="male">مرد</label>
+        <input class="patiClass" id="male" checked name="gender" value="male" type="radio">
+
+        <label class="patiClass" for="female">زن</label>
+        <input class="patiClass" id="female" name="gender" value="female" type="radio">
+        <br class="patiClass">
+
+        <!-- patient -->
+
+        <!-- operator -->
+        <label class="operaClass hidden" for="licence"><i class="gb gb_assignment"></i></label>
+        <input class="operaClass hidden" id="licence" type="text" placeholder="مدرک اپراتور" name="licence">
+        <br class="operaClass hidden">
+        <!-- operator -->
+
+        <input class="btn btn-submit" type="submit" value="تکمیل">
+        <input class="btn btn-reset" type="reset" value="پاکسازی">
+
+        <!-- plugins -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            function hidder(name){
+                if (name === "doct"){
+                    $(".operaClass").attr("class","operaClass hidden");
+                    $(".patiClass").attr("class","patiClass hidden");
+                }
+
+                if (name === "pati"){
+                    $(".operaClass").attr("class","operaClass hidden");
+                    $(".dociClass").attr("class","dociClass hidden");
+                }
+
+                if (name === "oper"){
+                    $(".patiClass").attr("class","patiClass hidden");
+                    $(".dociClass").attr("class","dociClass hidden");
+                }
+            }
+
+            function doct(){
+                $("input[type='number']").attr("class","age_field hidden");
+                hidder("doct")
+                $(".dociClass").attr("class","dociClass");
+            }
+
+            function pati(){
+                hidder("pati")
+                $(".patiClass").attr("class","patiClass");
+                $("input[type='number']").attr("class","age_field");
+            }
+
+            function oper(){
+                $("input[type='number']").attr("class","age_field hidden");
+                hidder("oper")
+                $(".operaClass").attr("class","operaClass");
+            }
+        </script>
+        <!-- plugins -->
+    </div>
+</form>
+</body>
+</html>

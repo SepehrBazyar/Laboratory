@@ -36,15 +36,9 @@
         <h1 class="rtl text-4xl mb-8 text-red-600 text-center sm:text-right font-bold"><i class="gb gb_receipt ml-2 text-red-800"></i>آزمایش ها : </h1>
         <hr class="border-red-200 opacity-100">
         <ul class="list-decimal p-4 pr-8 rtl">
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>05/08/1398</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
-            <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>13/05/1399</span>تست اعتیاد</a></li>
+            {% for test in tests %}
+                <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href="#"><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>{{ test[7] }}</span>{{ test[5] }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>

@@ -1,7 +1,7 @@
 from datetime import timedelta
 from flask import render_template, request, redirect, make_response
 from flask.helpers import url_for
-
+from hashlib import sha256
 from core.utility import retrieve_user
 from .models import *
 from core.manager import *
@@ -13,7 +13,9 @@ def profile(_id):
     if cookies.get('_ID'):
         check_res = db_manger.check_record('users', national_code=_id)
         user = retrieve_user(check_res[0])
-        return render_template("resume.html", data=user)
+        tests = db_manger.read_user_tests(user)
+        print(*tests, sep='\n')
+        return render_template("resume.html", data=user, tests=tests)
     else:
         return redirect(url_for('register'))
 
@@ -24,9 +26,10 @@ def register():
         return redirect(f"/profile/{cookies.get('_ID')}")
     else:
         if request.method == "GET":
-            return render_template("register.html")
+            return render_template("reg.html")
         else:
             _vars = request.form
+            print(_vars)
             try:
                 user_type = _vars.get("user_type")
                 user_type_id = db_manger.get_id('user_type', type=user_type)
@@ -40,7 +43,7 @@ def register():
                 last_name = _vars.get("username").split(" ", 1)[1]
                 national_code = _vars.get("national")
                 phone = _vars.get("phone")
-                password = _vars.get("password")
+                password = sha256(_vars.get("password").encode()).hexdigest()
                 email = _vars.get("email")
                 if user_type == 'patient':
                     extra_data_dict = {"gender":_vars.get("gender"), "age":_vars.get("age"), "blood_type":_vars.get("blood_type")}
@@ -60,11 +63,11 @@ def register():
                 db_manger.create(table="users", model=user)
                 print("Congrats. Your Account Is Created")
             except AssertionError:
-                return render_template("register.html")
+                return render_template("reg.html")
             else:
-                html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
+                html_str = redirect(f"/profile/{_vars.get('national')}")
                 resp = make_response(html_str)
-                resp.set_cookie('_ID', '1' + _vars.get('national'))
+                resp.set_cookie('_ID', _vars.get('national'))
                 return resp
 
 
@@ -79,17 +82,21 @@ def login():
             _vars = request.form
             # user = Patient._FILE.read('1' + _vars.get('national'))
             password_hashed = sha256(_vars.get('password').encode()).hexdigest()
+            print(password_hashed, _vars.get('national'))
             check_res = db_manger.check_record('users', national_code=_vars.get('national'), password=password_hashed)
+            print(check_res[0])
             if check_res:
                 user = retrieve_user(check_res[0])
-                if user and user.password == password_hashed:
-                    html_str = redirect(f"/profile/{'1' + _vars.get('national')}")
+                print(user, vars(user))
+                if user.password.strip() == password_hashed:
+
+                    html_str = redirect(f"/profile/{_vars.get('national')}")
                     resp = make_response(html_str)
                     if _vars.get('remember'):
                         resp.set_cookie(
-                            '_ID', '1' + _vars.get('national'), max_age=timedelta(weeks=1))
+                            '_ID', _vars.get('national'), max_age=timedelta(weeks=1))
                     else:
-                        resp.set_cookie('_ID', '1' + _vars.get('national'))
+                        resp.set_cookie('_ID', _vars.get('national'))
                     return resp
             return render_template("login.html")
 
