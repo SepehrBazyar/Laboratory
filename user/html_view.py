@@ -60,6 +60,6 @@ def login():
 
 
 def logout():
-    resp = make_response(render_template("login.html"))
+    resp = redirect("/login")
     resp.delete_cookie('_ID')
     return resp
