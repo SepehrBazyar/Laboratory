@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask
 from user import html_view
 
 # config
