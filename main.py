@@ -2,20 +2,6 @@ import menu
 import user.menu_view as user_view
 import lab.lab_views as Lab_view
 from core.service import initialize_setup
-import core.utility as core_utility
-
-
-class Manage:
-    "ertebat beyne baqie class ha"
-    pass
-
-
-class Output:
-    pass
-
-
-class Input:
-    pass
 
 
 menu_dic = {
