@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 from typing import List
 
 from user import models
@@ -12,27 +13,39 @@ Patient_list = []
 Tests = []
 
 
-def cv19_view():
-    print("Enter your profile : ")
-    first_name = input("First Name : ")
-    last_name = input("Last Name : ")
-    phone = input("Phone : ")
-    email = input("Email(Optional) : ")
-
-    patient = models.Patient(first_name, last_name, phone, email)
-    Patient_list.append(patient)
-
-    print("Your profile saved !")
-    print("Testing patient ", end="")
-
-    [sleep(1) or print(".", end="") for i in range(3)]
-
-    cv19 = CV19(patient)
-
+def register_test(test_name, patient):
+    request_date = datetime.today().strftime('%Y-%m-%d')
+    result_date = (datetime.today() + timedelta(days=7)).strftime('%Y-%m-%d')
+    user_id = db_manager.get_id('users', national_code=patient.national_code)
+    test_info_id = db_manager.get_id('test_info', test_name=test_name)
+    cv19_test = CV19(request_date=request_date, result_date=result_date, user_id=user_id, test_info_id=test_info_id)
+    db_manager.create(table="tests", model=cv19_test)
     print("Done ! ")
+    print("Estimated result time : ", cv19_test.result_date)
 
-    Tests.append(cv19)
-    print("Estimated result time : ", cv19.estimate_time)
+
+#
+# def cv19_view():
+#     print("Enter your profile : ")
+#     first_name = input("First Name : ")
+#     last_name = input("Last Name : ")
+#     phone = input("Phone : ")
+#     email = input("Email(Optional) : ")
+#
+#     patient = models.Patient(first_name, last_name, phone, email)
+#     Patient_list.append(patient)
+#
+#     print("Your profile saved !")
+#     print("Testing patient ", end="")
+#
+#     [sleep(1) or print(".", end="") for i in range(3)]
+#
+#     cv19 = CV19(patient)
+#
+#     print("Done ! ")
+#
+#     Tests.append(cv19)
+#     print("Estimated result time : ", cv19.estimate_time)
 
 
 def result(test_id):

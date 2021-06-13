@@ -34,7 +34,7 @@ menu_dic = {
                   {"name": "new test",
                    "children": [
                        {"name": "Covid19 test",
-                        "function": Lab_view.cv19_view,
+                        "function": Lab_view.register_test,
                         "description": "Covid19 test",
                         },
                    ],
@@ -53,7 +53,7 @@ menu_dic = {
                   {"name": "new test",
                    "children": [
                        {"name": "Covid19 test",
-                        "function": Lab_view.cv19_view,
+                        "function": Lab_view.register_test,
                         "description": "Covid19 test",
                         },
                    ],

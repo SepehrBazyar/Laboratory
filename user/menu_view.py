@@ -28,8 +28,6 @@ def register():
     u_manger.create(table="users", model=user_patient)
     print("Congrats. Your Account Is Created")
 
-    # todo : we agreed to use national code ad username, so it should be considered in login
-
 
 def login():
     user_name = input("enter your username (national_code):")
