@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timedelta
 
 from core.models import BaseModels
@@ -27,3 +28,10 @@ class CV19(Basetest):
         if not hasattr(self, '__result'):
             raise Exception
         return bool(self.__result)
+
+
+class TestInfo:
+    def __init__(self, test_name, price, **test_info_extra_data):
+        self.test_name = test_name
+        self.price = price
+        self.extra_data = json.dumps(test_info_extra_data)
