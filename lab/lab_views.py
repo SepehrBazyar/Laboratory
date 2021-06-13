@@ -1,3 +1,4 @@
+import json
 from typing import List
 
 from user import models
@@ -34,12 +35,10 @@ def cv19_view():
     print("Estimated result time : ", cv19.estimate_time)
 
 
-def result():
-    pass
-
-
-def update_test():
-    pass
+def result(test_id):
+    test = db_manager.read(table='tests', row_id=test_id)
+    res = test[0][2]
+    return res
 
 
 def user_tests(user) -> List[tuple]:

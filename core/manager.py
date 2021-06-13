@@ -180,8 +180,8 @@ class DatabaseManager(BaseManager):
 
     def update_json_content(self, table, **kwargs):
         """this method is for updating jason content
-            kwargs should include id of a row, target columns, and one or more json content for updating
-            Example: row_id=1, extra_info= {"age":"22"}"""
+            kwargs should include id of a row, and one or more target_column=json_content for updating
+            Example: id=1, extra_info= {"age":"22"}"""
         condition_string_key = list(kwargs.keys())[0]
         condition_string_value = kwargs[condition_string_key]
         condition_string = f"{condition_string_key}='{condition_string_value}'"
