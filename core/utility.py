@@ -35,6 +35,13 @@ def login_authorization():
 def retrieve_user(data: tuple) -> models.User:
     # extracting extra_info from json file
     extra_info = json.loads(json.dumps(data[7]))
-    user = models.Patient(first_name=data[0].strip(), last_name=data[1].strip(), national_code=data[2].strip(),
-                          phone=data[3].strip(), email=data[4], password=data[5].strip(), **extra_info)
+    if data[6] == 1:
+        user = models.Patient(first_name=data[0].strip(), last_name=data[1].strip(), national_code=data[2].strip(),
+                            phone=data[3].strip(), email=data[4], password=data[5].strip(), **extra_info)
+    elif data[6] == 2:
+        user = models.Doctor(first_name=data[0].strip(), last_name=data[1].strip(), national_code=data[2].strip(),
+                            phone=data[3].strip(), email=data[4], password=data[5].strip(), **extra_info)
+    else:
+        user = models.Operator(first_name=data[0].strip(), last_name=data[1].strip(), national_code=data[2].strip(),
+                            phone=data[3].strip(), email=data[4], password=data[5].strip(), **extra_info)
     return user
