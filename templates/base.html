@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
     <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="https://icons.iconarchive.com/icons/graphicloads/100-flat/32/laboratory-icon.png">
-    {% block tags_link %}
+    {% block bootstrap %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     {% endblock %}
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://icons.iconarchive.com/icons/graphicloads/100-flat/32/laboratory-icon.png">
     <title>آزمایشگاه | {% block title %}{% endblock %}</title>
-    <style>
+    {% block extra_head %}
+        <style>
         html {
             background: #fafafa;
         }
 
-        * , body {
+        *, body {
             direction: rtl;
             font-family: Yekan, sans-serif;
             padding: 0;
@@ -92,12 +94,12 @@
             border: 1px solid #eee;
         }
 
-        {% block extra_style %}
-        {% endblock %}
+
     </style>
+    {% endblock %}
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 </body>
 </html>

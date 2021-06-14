@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 {% block title %}نتیجه آزمایش{% endblock %}
+{% block extra_head %}
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <style>
+        * {
+            font-family: Vazir, sans-serif;
+        }
+
+        .rtl {
+            direction: rtl !important;
+        }
+
+        .ltr {
+            direction: ltr !important;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <div class="w-7/12 bg-white mx-auto">
         <h1 class="block mt-8 text-4xl rounded bg-green-400 text-white font-bold py-4 px-8 text-center">نتیجه آزمایش

@@ -1,45 +1,78 @@
 {% extends "base.html" %}
-{% block tags_link %}
+{% block title %}پروفایل من{% endblock %}
+{% block extra_head %}
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
-{% endblock %}
-{% block title %}پروفایل من{% endblock %}
-{% block extra_style %}
-* {font-family: Vazir, sans-serif;}
-.rtl {direction: rtl !important;}
-.ltr {direction: ltr !important;}
-.log-out:hover {left: -5px !important;}
+    <style>
+        * {
+            font-family: Vazir, sans-serif;
+        }
+
+        .rtl {
+            direction: rtl !important;
+        }
+
+        .ltr {
+            direction: ltr !important;
+        }
+
+        .log-out:hover {
+            left: -5px !important;
+        }
+    </style>
 {% endblock %}
 {% block content %}
-<div class="absolute top-0 bottom-0 w-full md:w-10/10 mx-auto gap-0 grid grid-cols-10">
-    <div class="sm:col-span-4 bg-purple-700 col-span-10 p-8 text-center relative">
-        <a href="{{ url_for('logout') }}" class="log-out transition-all border-4 border-red-500 hover:bg-red-600 hover:border-red-700 mx-auto block rtl text-xl absolute top-8 hover:left-0 text-white font-bold bg-red-500 rounded-tr-full rounded-br-full p-4" style="left: -178px;"><i class="gb gb_highlight_off ml-2" style="font-size:35px"></i>خارج شدن از حساب</a>
-        <img class="rounded-full border-8 mb-8 inline" src="https://www.datocms-assets.com/36798/1617145265-9918912.jpg?crop=focalpoint&fit=crop&h=256&w=256" alt="Hasan Rouhani">
-        <b class="block mb-8 text-4xl sm:text-2xl lg:text-4xl text-white">{{ data.first_name }} {{ data.last_name }}<!-- <i class="gb ml-2 gb_face text-white"></i> --></b>
-        <hr class="opacity-50">
-        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-8"><i class="gb gb_phone ml-2"></i>شماره تماس : <span>{{ data.phone }}</span></span>
-        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_account_box ml-2"></i>کد ملی : <span>{{ data.national_code }}</span></span>
-        <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i class="gb gb_email ml-2"></i>ایمیل : <span>{{ data.email }}</span></span>
-        <form class="bg-black rtl bg-opacity-40 font-bold mt-8 p-4 md:p-8 grid gap-4 xl:gap-8 grid-cols-6 rounded-lg w-full" action="{{ url_for('new_test') }}">
-            <label for="ttype" class="text-center text-yellow-400 block text-xl md:text-2xl col-span-6 mb-0 ltr">ثبت آزمایش جدید<i class="gb gb_add_box ml-2"></i></label>
-            <select id="ttype" name="test_type" class="rounded transition-all py-2 px-4 col-span-6 lg:col-span-4 w-full">
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="" selected disabled hidden>انتخاب کنید</option>
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="corona">کرونا</option>
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="cbc">خون</option>
-                <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="blood">گروه خونی</option>
-            </select>
-            <button type="submit" class="bg-yellow-400 ltr transition-all col-span-6 lg:col-span-2 rounded py-2 px-4 w-full text-white border-2 border-yellow-400 hover:bg-yellow-500 hover:border-yellow-600 font-bold">ثبت <i class="gb gb_done"></i></button>
-        </form>
-        <a href="#" class="bg-blue-400 mt-8 block transition-all rounded py-2 px-4 w-full mr-4 text-white border-2 border-blue-400 hover:bg-blue-500 hover:border-blue-600 font-bold">ارتباط با ما <i class="gb gb_perm_phone_msg"></i></a>
+    <div class="absolute top-0 bottom-0 w-full md:w-10/10 mx-auto gap-0 grid grid-cols-10">
+        <div class="sm:col-span-4 bg-purple-700 col-span-10 p-8 text-center relative">
+            <a href="{{ url_for('logout') }}"
+               class="log-out transition-all border-4 border-red-500 hover:bg-red-600 hover:border-red-700 mx-auto block rtl text-xl absolute top-8 hover:left-0 text-white font-bold bg-red-500 rounded-tr-full rounded-br-full p-4"
+               style="left: -178px;"><i class="gb gb_highlight_off ml-2" style="font-size:35px"></i>خارج شدن از حساب</a>
+            <img class="rounded-full border-8 mb-8 inline"
+                 src="https://www.datocms-assets.com/36798/1617145265-9918912.jpg?crop=focalpoint&fit=crop&h=256&w=256"
+                 alt="Hasan Rouhani">
+            <b class="block mb-8 text-4xl sm:text-2xl lg:text-4xl text-white">{{ data.first_name }}
+                {{ data.last_name }}<!-- <i class="gb ml-2 gb_face text-white"></i> --></b>
+            <hr class="opacity-50">
+            <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-8"><i
+                    class="gb gb_phone ml-2"></i>شماره تماس : <span>{{ data.phone }}</span></span>
+            <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i
+                    class="gb gb_account_box ml-2"></i>کد ملی : <span>{{ data.national_code }}</span></span>
+            <span class="block opacity-60 hover:opacity-100 transition-all rtl text-right mr-8 text-white text-xl mt-4"><i
+                    class="gb gb_email ml-2"></i>ایمیل : <span>{{ data.email }}</span></span>
+            <form class="bg-black rtl bg-opacity-40 font-bold mt-8 p-4 md:p-8 grid gap-4 xl:gap-8 grid-cols-6 rounded-lg w-full"
+                  action="{{ url_for('new_test') }}">
+                <label for="ttype" class="text-center text-yellow-400 block text-xl md:text-2xl col-span-6 mb-0 ltr">ثبت
+                    آزمایش جدید<i class="gb gb_add_box ml-2"></i></label>
+                <select id="ttype" name="test_type"
+                        class="rounded transition-all py-2 px-4 col-span-6 lg:col-span-4 w-full">
+                    <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="" selected disabled
+                            hidden>انتخاب کنید
+                    </option>
+                    <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="corona">کرونا</option>
+                    <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="cbc">خون</option>
+                    <option class="bg-black bg-opacity-60 text-white font-bold rounded" value="blood">گروه خونی</option>
+                </select>
+                <button type="submit"
+                        class="bg-yellow-400 ltr transition-all col-span-6 lg:col-span-2 rounded py-2 px-4 w-full text-white border-2 border-yellow-400 hover:bg-yellow-500 hover:border-yellow-600 font-bold">
+                    ثبت <i class="gb gb_done"></i></button>
+            </form>
+            <a href="#"
+               class="bg-blue-400 mt-8 block transition-all rounded py-2 px-4 w-full mr-4 text-white border-2 border-blue-400 hover:bg-blue-500 hover:border-blue-600 font-bold">ارتباط
+                با ما <i class="gb gb_perm_phone_msg"></i></a>
+        </div>
+        <div class="sm:col-span-6 col-span-10 lg:pr-18 p-8 text-center">
+            <h1 class="rtl text-4xl mb-8 text-red-600 text-center sm:text-right font-bold"><i
+                    class="gb gb_receipt ml-2 text-red-800"></i>آزمایش ها : </h1>
+            <hr class="border-red-200 opacity-100">
+            <ul class="list-decimal p-4 pr-8 rtl">
+                {% for test in tests %}
+                    <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative">
+                        <a class="w-full py-1 block" href='{{ url_for("test_result", test_id=test[0]) }}'><span
+                                class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1"
+                                                                                      style="font-size: 22px"></i>{{ test[7] }}</span>{{ test[5] }}
+                        </a></li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-    <div class="sm:col-span-6 col-span-10 lg:pr-18 p-8 text-center">
-        <h1 class="rtl text-4xl mb-8 text-red-600 text-center sm:text-right font-bold"><i class="gb gb_receipt ml-2 text-red-800"></i>آزمایش ها : </h1>
-        <hr class="border-red-200 opacity-100">
-        <ul class="list-decimal p-4 pr-8 rtl">
-            {% for test in tests %}
-                <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative"><a class="w-full py-1 block" href='{{ url_for("test_result", test_id=test[0]) }}'><span class="absolute left-0 text-gray-600 text-sm pt-1"><i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>{{ test[7] }}</span>{{ test[5] }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
 {% endblock %}
