@@ -11,6 +11,7 @@ app.add_url_rule("/login", 'login', html_view.login, methods=['GET', 'POST'])
 app.add_url_rule("/logout", 'logout', html_view.logout)
 app.add_url_rule("/new_test", 'new_test', html_view.new_test)
 app.add_url_rule("/test_result", 'test_result', html_view.test_result)
+app.add_url_rule("/all_test", "all_test", html_view.test_all)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8001)

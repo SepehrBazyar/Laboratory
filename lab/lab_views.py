@@ -25,6 +25,7 @@ def register_test(test_name, patient):
 
 
 
+
 def result(test_id):
     test = db_manager.read(table='tests', row_id=test_id)
     res = test[0][2]
@@ -50,7 +51,8 @@ def user_tests(user) -> List[tuple]:
 
 
 def repr_all_test():
-    pass
+    all_tests= db_manager.read_all("tests")
+    return all_tests
 
 
 def manage_test():
