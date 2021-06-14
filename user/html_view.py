@@ -121,6 +121,9 @@ def test_result():
 def test_all():
     cookies = request.cookies
     if cookies.get('_ID'):
-        tests = repr_all_test()
-        return render_template("tests.html", tests = tests)
+        check_res = db_manger.check_record('users', national_code=cookies.get('_ID'))
+        user = retrieve_user(check_res[0])
+        if user.type_of_user == 2:
+            tests = repr_all_test()
+            return render_template("tests.html", tests = tests)
     return redirect('/login')
