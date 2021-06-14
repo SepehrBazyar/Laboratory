@@ -3,97 +3,97 @@
 {% block extra_head %}
     <style>
 
-    html {
-        background: #fafafa;
-    }
+        html {
+            background: #fafafa;
+        }
 
-    *, body {
-        direction: rtl;
-        font-family: Yekan, sans-serif;
-        padding: 0;
-        margin: 0;
-        font-size: 18px;
-        box-sizing: border-box;
-    }
+        *, body {
+            direction: rtl;
+            font-family: Yekan, sans-serif;
+            padding: 0;
+            margin: 0;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
 
-    .center {
-        margin: 0 auto;
-        text-align: center;
-    }
+        .center {
+            margin: 0 auto;
+            text-align: center;
+        }
 
-    .btn {
-        min-width: 110px;
-        background: #2196f3;
-        color: white;
-        outline: none;
-        padding: 5px 20px;
-        text-align: center;
-        margin: 40px auto;
-        border-radius: 5px;
-        border: 2px solid #018bdb;
-        text-shadow: 0 1px 0 #000;
-        box-shadow: 0 0 5px inset #777, 0 0 10px #777;
-    }
+        .btn {
+            min-width: 110px;
+            background: #2196f3;
+            color: white;
+            outline: none;
+            padding: 5px 20px;
+            text-align: center;
+            margin: 40px auto;
+            border-radius: 5px;
+            border: 2px solid #018bdb;
+            text-shadow: 0 1px 0 #000;
+            box-shadow: 0 0 5px inset #777, 0 0 10px #777;
+        }
 
-    .btn-submit {
-        background: #3bbf40;
-        border-color: #26863b;
-        margin: 0 50px 0 38px;
-    }
+        .btn-submit {
+            background: #3bbf40;
+            border-color: #26863b;
+            margin: 0 50px 0 38px;
+        }
 
-    .btn-reset {
-        background: #ff2222;
-        border-color: #e32e00;
-    }
+        .btn-reset {
+            background: #ff2222;
+            border-color: #e32e00;
+        }
 
-    .btn:hover {
-        box-shadow: 0 0 10px #777;
-        cursor: pointer;
-    }
+        .btn:hover {
+            box-shadow: 0 0 10px #777;
+            cursor: pointer;
+        }
 
-    body > strong {
-        display: block;
-        color: #018bdb;
-        margin: 45px 45px 20px 20px;
-        font-size: 35px;
-        text-align: center;
-        text-shadow: 0 1px 0 #000;
-    }
+        body > strong {
+            display: block;
+            color: #018bdb;
+            margin: 45px 45px 20px 20px;
+            font-size: 35px;
+            text-align: center;
+            text-shadow: 0 1px 0 #000;
+        }
 
-    input {
-        box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
-        border-radius: 5px;
-        outline: none;
-        padding: 5px 10px;
-        margin-top: 10px;
-        border: 1px solid #eee;
-    }
+        input {
+            box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
+            border-radius: 5px;
+            outline: none;
+            padding: 5px 10px;
+            margin-top: 10px;
+            border: 1px solid #eee;
+        }
 
-    label {
-        margin-top: 10px;
-    }
+        label {
+            margin-top: 10px;
+        }
 
-    label > i {
-        text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
-    }
+        label > i {
+            text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
+        }
 
-    form > div > label {
-        border-radius: 0 5px 5px 0;
-        color: #018bdb;
-        padding: 0 10px;
-        text-align: center;
-        font-size: 28px;
-    }
+        form > div > label {
+            border-radius: 0 5px 5px 0;
+            color: #018bdb;
+            padding: 0 10px;
+            text-align: center;
+            font-size: 28px;
+        }
 
-    .age_field {
-        width: 260px;
-    }
+        .age_field {
+            width: 260px;
+        }
 
-    .hidden {
-        display: none !important;
-    }
+        .hidden {
+            display: none !important;
+        }
 
-</style>
+    </style>
 {% endblock %}
 {% block content %}
     <strong class="">ثبت نام</strong>
@@ -121,8 +121,5 @@
             <input class="btn btn-submit" type="submit" value="تکمیل">
             <input class="btn btn-reset" type="reset" value="پاکسازی">
         </div>
-        <center>
-            <a href="{{ url_for('login') }}">حساب کاربری دارید؟ ورود</a>
-        </center>
     </form>
 {% endblock %}

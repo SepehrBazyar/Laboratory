@@ -161,46 +161,49 @@
         <input class="btn btn-submit" type="submit" value="تکمیل">
         <input class="btn btn-reset" type="reset" value="پاکسازی">
 
-        <!-- plugins -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            function hidder(name){
-                if (name === "doct"){
-                    $(".operaClass").attr("class","operaClass hidden");
-                    $(".patiClass").attr("class","patiClass hidden");
-                }
-
-                if (name === "pati"){
-                    $(".operaClass").attr("class","operaClass hidden");
-                    $(".dociClass").attr("class","dociClass hidden");
-                }
-
-                if (name === "oper"){
-                    $(".patiClass").attr("class","patiClass hidden");
-                    $(".dociClass").attr("class","dociClass hidden");
-                }
-            }
-
-            function doct(){
-                $("input[type='number']").attr("class","age_field hidden");
-                hidder("doct")
-                $(".dociClass").attr("class","dociClass");
-            }
-
-            function pati(){
-                hidder("pati")
-                $(".patiClass").attr("class","patiClass");
-                $("input[type='number']").attr("class","age_field");
-            }
-
-            function oper(){
-                $("input[type='number']").attr("class","age_field hidden");
-                hidder("oper")
-                $(".operaClass").attr("class","operaClass");
-            }
-        </script>
-        <!-- plugins -->
+        <center>
+            <a href="{{ url_for('login') }}" style="padding-right: 40px;text-decoration: none !important">حساب کاربری دارید؟ ورود</a>
+        </center>
     </div>
 </form>
+<!-- plugins -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function hidder(name) {
+        if (name === "doct") {
+            $(".operaClass").attr("class", "operaClass hidden");
+            $(".patiClass").attr("class", "patiClass hidden");
+        }
+
+        if (name === "pati") {
+            $(".operaClass").attr("class", "operaClass hidden");
+            $(".dociClass").attr("class", "dociClass hidden");
+        }
+
+        if (name === "oper") {
+            $(".patiClass").attr("class", "patiClass hidden");
+            $(".dociClass").attr("class", "dociClass hidden");
+        }
+    }
+
+    function doct() {
+        $("input[type='number']").attr("class", "age_field hidden");
+        hidder("doct")
+        $(".dociClass").attr("class", "dociClass");
+    }
+
+    function pati() {
+        hidder("pati")
+        $(".patiClass").attr("class", "patiClass");
+        $("input[type='number']").attr("class", "age_field");
+    }
+
+    function oper() {
+        $("input[type='number']").attr("class", "age_field hidden");
+        hidder("oper")
+        $(".operaClass").attr("class", "operaClass");
+    }
+</script>
+<!-- plugins -->
 </body>
 </html>
