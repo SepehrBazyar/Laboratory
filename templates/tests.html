@@ -27,12 +27,12 @@
         <ul class="list-decimal p-4 pr-8 rtl">
             {% for test in tests %}
                 <li class="opacity-50 my-4 p-0 text-right hover:opacity-100 transition-all text-xl hover:font-bold pr-1 relative">
-                    <a class="w-full py-1 block" href='{{ url_for("test_result", test_id=test[0]) }}'>
+                    <a class="w-full py-1 block" href='{{ url_for("all_test") }}'>
                         <span class="absolute left-0 text-gray-600 text-sm pt-1">
                             <i class="gb gb_date_range ml-1 mb-1" style="font-size: 22px"></i>
-                            {{ test[7] }}
+                            {{ test[1] }}
                         </span>
-                        {{ test[5] }}
+                        {{ test[2] }}
                     </a>
                 </li>
             {% endfor %}

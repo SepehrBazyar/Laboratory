@@ -4,7 +4,7 @@ from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
 
 from core.utility import retrieve_user
-from lab.lab_views import register_test, result
+from lab.lab_views import register_test, result, repr_all_test
 from .models import *
 from core.manager import *
 
@@ -116,4 +116,11 @@ def test_result():
     if cookies.get('_ID'):
         res = result(test_id)
         return render_template('res.html', res=res)
+    return redirect('/login')
+
+def test_all():
+    cookies = request.cookies
+    if cookies.get('_ID'):
+        tests = repr_all_test()
+        return render_template("tests.html", tests = tests)
     return redirect('/login')
