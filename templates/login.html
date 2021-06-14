@@ -1,80 +1,84 @@
 {% extends "base.html" %}
 {% block title %}ورود{% endblock %}
+{% block bootstrap %}{{ super() }}{% endblock %}
 {% block extra_head %}
-.valid-feedback,
-.invalid-feedback {
-text-align: right;
-}
+    <style>
 
-.card {
-margin: 0.5rem auto;
-}
+        .valid-feedback,
+        .invalid-feedback {
+            text-align: right;
+        }
 
-.card-body {
-margin: 50px auto;
-padding: 0 1rem;
-}
+        .card {
+            margin: 0.5rem auto;
+        }
 
-.custom-control.custom-checkbox {
-padding-left: 0;
-text-align: right;
-}
+        .card-body {
+            margin: 50px auto;
+            padding: 0 1rem;
+        }
 
-label.custom-control-label {
-position: relative;
-padding-right: 1.5rem;
-}
+        .custom-control.custom-checkbox {
+            padding-left: 0;
+            text-align: right;
+        }
 
-label.custom-control-label::before,
-label.custom-control-label::after {
-right: 0;
-left: auto;
-}
+        label.custom-control-label {
+            position: relative;
+            padding-right: 1.5rem;
+        }
+
+        label.custom-control-label::before,
+        label.custom-control-label::after {
+            right: 0;
+            left: auto;
+        }
+    </style>
 {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="card">
-        <form action="{{ url_for('login') }}" method="POST">
-            <div class="card-header">
-                <h1><strong>ورود</strong></h1>
-            </div>
-            <div class="card-body">
-                <div class="form-group was-validated">
-                    <!-- <label for="national"><i class="gb gb_nature_people"></i></label> -->
-                    <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
-                        minlength="10" maxlength="10" required>
-                    <div class="valid-feedback">صحیح</div>
-                    <div class="invalid-feedback">نامعتبر(دقیقا &#1776 &#1777 رقم)</div>
+    <div class="container">
+        <div class="card">
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="card-header">
+                    <h1><strong>ورود</strong></h1>
                 </div>
-                <div class="form-group was-validated">
-                    <!-- <label for="password"><i class="gb gb_vpn_key"></i></label> -->
-                    <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
-                        required>
-                    <div class="valid-feedback">صحیح</div>
-                    <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
-                </div>
-                <!-- <select name="post" class="custom-select mb-3">
-                        <option selected>لطفا سِمَت خود را انتخاب نمایید</option>
-                        <option value="patient">بیمار</option>
-                        <option value="doctor">دکتر</option>
-                    </select> -->
-                <div class="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" class="custom-control-input" id="remember" name="remember">
-                    <label class="custom-control-label" for="remember">مرا بخاطر بسپار</label>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <button type="submit" class="btn btn-submit">ورود</button>
+                <div class="card-body">
+                    <div class="form-group was-validated">
+                        <!-- <label for="national"><i class="gb gb_nature_people"></i></label> -->
+                        <input type="text" class="form-control" id="national" placeholder="کد ملی" name="national"
+                               minlength="10" maxlength="10" required>
+                        <div class="valid-feedback">صحیح</div>
+                        <div class="invalid-feedback">نامعتبر(دقیقا &#1776 &#1777 رقم)</div>
                     </div>
-                    <div class="col">
-                        <button type="reset" class="btn btn-reset">پاکسازی</button>
+                    <div class="form-group was-validated">
+                        <!-- <label for="password"><i class="gb gb_vpn_key"></i></label> -->
+                        <input class="form-control" id="password" type="password" placeholder="رمز عبور" name="password"
+                               required>
+                        <div class="valid-feedback">صحیح</div>
+                        <div class="invalid-feedback">لطفا رمز عبور خود را وارد نمایید</div>
                     </div>
+                    <!-- <select name="post" class="custom-select mb-3">
+                            <option selected>لطفا سِمَت خود را انتخاب نمایید</option>
+                            <option value="patient">بیمار</option>
+                            <option value="doctor">دکتر</option>
+                        </select> -->
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                        <label class="custom-control-label" for="remember">مرا بخاطر بسپار</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-submit">ورود</button>
+                        </div>
+                        <div class="col">
+                            <button type="reset" class="btn btn-reset">پاکسازی</button>
+                        </div>
+                    </div>
+                    <center>
+                        <a href="{{ url_for('register') }}">کاربر جدید هستید؟ ثبت نام</a>
+                    </center>
                 </div>
-                <center>
-                    <a href="{{ url_for('register') }}">کاربر جدید هستید؟ ثبت نام</a>
-                </center>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}
