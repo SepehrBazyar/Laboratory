@@ -22,10 +22,14 @@
         <h1 class="block mt-8 text-4xl rounded bg-green-400 text-white font-bold py-4 px-8 text-center">نتیجه آزمایش
             شما</h1>
         <hr class="opacity-40 my-4 w-full">
-        <p class="bg-grey-200 text-black p-8 rounded-b-r rounded-b-l">
-            {% for k, v in res.items() %}
-                <b>{{ k }} : </b><span>{{ v }}</span><br>
-            {% endfor %}
+        <p class="bg-grey-200 text-black p-8 px-10 rounded-b-r rounded-b-l">
+            {% if type(res) == "str" %}
+                <b class="text-3xl text-center block">{{ res }}</b>
+            {% else %}
+                {% for k, v in res.items() %}
+                    <b class="text-3xl">{{ k }} : </b><span class="text-2xl">{{ v }}</span><br>
+                {% endfor %}
+            {% endif %}
         </p>
     </div>
 {% endblock %}
