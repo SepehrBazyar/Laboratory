@@ -1,106 +1,36 @@
-<!DOCTYPE html>
-<html lang="fa-IR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ثبت نام</title>
-    <link rel="stylesheet" href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
-    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
-</head>
-<style>
+{% extends "base.html" %}
+{% block title %}ثبت نام{% endblock %}
+{% block extra_head %}
+    <style>
+        {{ super() }}
 
-    html {
-        background: #fafafa;
-    }
+        label {
+            margin-top: 10px;
+        }
 
-    *, body {
-        direction: rtl;
-        font-family: Yekan, sans-serif;
-        padding: 0;
-        margin: 0;
-        font-size: 18px;
-        box-sizing: border-box;
-    }
+        label > i {
+            text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
+        }
 
-    .center {
-        margin: 0 auto;
-        text-align: center;
-    }
+        form > div > label {
+            border-radius: 0 5px 5px 0;
+            color: #018bdb;
+            padding: 0 10px;
+            text-align: center;
+            font-size: 28px;
+        }
 
-    .btn {
-        min-width: 110px;
-        background: #2196f3;
-        color: white;
-        outline: none;
-        padding: 5px 20px;
-        text-align: center;
-        margin: 40px auto;
-        border-radius: 5px;
-        border: 2px solid #018bdb;
-        text-shadow: 0 1px 0 #000;
-        box-shadow: 0 0 5px inset #777, 0 0 10px #777;
-    }
+        .age_field {
+            width: 260px;
+        }
 
-    .btn-submit {
-        background: #3bbf40;
-        border-color: #26863b;
-        margin: 0 50px 0 38px;
-    }
+        .hidden {
+            display: none !important;
+        }
 
-    .btn-reset {
-        background: #ff2222;
-        border-color: #e32e00;
-    }
-
-    .btn:hover {
-        box-shadow: 0 0 10px #777;
-        cursor: pointer;
-    }
-
-    body > strong {
-        display: block;
-        color: #018bdb;
-        margin: 45px 45px 20px 20px;
-        font-size: 35px;
-        text-align: center;
-        text-shadow: 0 1px 0 #000;
-    }
-
-    input {
-        box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
-        border-radius: 5px;
-        outline: none;
-        padding: 5px 10px;
-        margin-top: 10px;
-        border: 1px solid #eee;
-    }
-
-    label {
-        margin-top: 10px;
-    }
-
-    label > i {
-        text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
-    }
-
-    form > div > label {
-        border-radius: 0 5px 5px 0;
-        color: #018bdb;
-        padding: 0 10px;
-        text-align: center;
-        font-size: 28px;
-    }
-
-    .age_field {
-        width: 260px;
-    }
-
-    .hidden {
-        display: none !important;
-    }
-
-</style>
-<body>
+    </style>
+{% endblock %}
+{% block content %}
 <strong class="">ثبت نام</strong>
 <form action="{{ url_for('register') }}" method="post">
     <div class="center">
@@ -205,5 +135,4 @@
     }
 </script>
 <!-- plugins -->
-</body>
-</html>
+{% endblock %}
