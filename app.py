@@ -6,8 +6,7 @@ app = Flask(__name__)
 
 app.add_url_rule("/", 'register', html_view.register, methods=['GET', 'POST'])
 app.add_url_rule("/profile/<_id>", 'profile', html_view.profile)
-app.add_url_rule("/register", 'register',
-                 html_view.register, methods=['GET', 'POST'])
+app.add_url_rule("/register", 'register',html_view.register, methods=['GET', 'POST'])
 app.add_url_rule("/login", 'login', html_view.login, methods=['GET', 'POST'])
 app.add_url_rule("/logout", 'logout', html_view.logout)
 app.add_url_rule("/new_test", 'new_test', html_view.new_test)

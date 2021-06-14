@@ -173,7 +173,11 @@ class DatabaseManager(BaseManager):
             return lab_cursor.fetchall()
 
     def read_all(self, table):
-        query = f"SELECT * FROM {table}"
+        query = f"""select tests.id, national_code, first_name, last_name, type, test_name, request_date, result_date from {table}
+                    inner join users on users.id = tests.user_id
+                    inner join test_info on test_info.id = tests.test_info_id
+                    inner join user_type on user_type.id = users.type_id;
+                    ;"""
         with self.access_database() as lab_cursor:
             lab_cursor.execute(query)
             return lab_cursor.fetchall()
