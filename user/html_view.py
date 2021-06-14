@@ -2,7 +2,6 @@ from datetime import timedelta
 from time import sleep
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
-from hashlib import sha256
 
 from core.utility import retrieve_user
 from lab.lab_views import register_test, result
@@ -18,7 +17,6 @@ def profile(_id):
         check_res = db_manger.check_record('users', national_code=_id)
         user = retrieve_user(check_res[0])
         tests = db_manger.read_user_tests(user)
-        print(*tests, sep='\n')
         return render_template("resume.html", data=user, tests=tests, )
     else:
         return redirect(url_for('register'))
@@ -33,16 +31,8 @@ def register():
             return render_template("reg.html")
         else:
             _vars = request.form
-            print(_vars)
             try:
                 user_type = _vars.get("user_type")
-                user_type_id = db_manger.get_id('user_type', type=user_type)
-                # extra_data = (db_manger.read('user_type', row_id=user_type_id))[0][1]
-                # extra_data = json.dumps(extra_data)
-                # extra_data_dict = json.loads(extra_data)
-                # for key, value in extra_data_dict.items():
-                #     value = input(f"enter your {key}:")
-                #     extra_data_dict.update({f"{key}": f"{value}"})
                 first_name = _vars.get("username").split(" ", 1)[0]
                 last_name = _vars.get("username").split(" ", 1)[1]
                 national_code = _vars.get("national")
@@ -69,6 +59,7 @@ def register():
                 print("Congrats. Your Account Is Created")
             except AssertionError:
                 return render_template("reg.html")
+            # check this indention
             else:
                 html_str = redirect(f"/profile/{_vars.get('national')}")
                 resp = make_response(html_str)
@@ -85,7 +76,6 @@ def login():
             return render_template("login.html")
         else:
             _vars = request.form
-            # user = Patient._FILE.read('1' + _vars.get('national'))
             password_hashed = sha256(_vars.get('password').encode()).hexdigest()
             check_res = db_manger.check_record('users', national_code=_vars.get('national'), password=password_hashed)
             if check_res:
