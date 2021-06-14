@@ -2,85 +2,40 @@
 {% block title %}ورود{% endblock %}
 {% block bootstrap %}{{ super() }}{% endblock %}
 {% block extra_head %}
+    {{ super() }}
+
     <style>
-
-
-        html {
-            background: #fafafa;
-        }
-
-        *, body {
-            direction: rtl;
-            font-family: Yekan, sans-serif;
-            padding: 0;
-            margin: 0;
-            font-size: 18px;
-            box-sizing: border-box;
-        }
-
-
-        .valid-feedback,
-        .invalid-feedback {
-            text-align: right;
-        }
-
-        .card {
-            margin: 0.5rem auto;
-        }
-
-        .card-body {
-            margin: 50px auto;
-            padding: 0 1rem;
-        }
-
-        .custom-control.custom-checkbox {
-            padding-left: 0;
-            text-align: right;
-        }
-
-        label.custom-control-label {
-            position: relative;
-            padding-right: 1.5rem;
-        }
-
-        label.custom-control-label::before,
-        label.custom-control-label::after {
-            right: 0;
-            left: auto;
-        }
-
-
-    .btn {
-        min-width: 110px;
-        background: #2196f3;
-        color: white;
-        outline: none;
-        padding: 5px 20px;
-        text-align: center;
-        margin: 40px auto;
-        border-radius: 5px;
-        border: 2px solid #018bdb;
-        text-shadow: 0 1px 0 #000;
-        box-shadow: 0 0 5px inset #777, 0 0 10px #777;
+    .valid-feedback,
+    .invalid-feedback {
+        text-align: right;
     }
 
-    .btn-submit {
-        background: #3bbf40;
-        border-color: #26863b;
-        margin: 0 50px 0 38px;
+    .card {
+        margin: 0.5rem auto;
     }
 
-    .btn-reset {
-        background: #ff2222;
-        border-color: #e32e00;
+    .card-body {
+        margin: 50px auto;
+        padding: 0 1rem;
     }
 
-    .btn:hover {
-        box-shadow: 0 0 10px #777;
-        cursor: pointer;
+    .custom-control.custom-checkbox {
+        padding-left: 0;
+        text-align: right;
     }
 
-    body > strong {
+    label.custom-control-label {
+        position: relative;
+        padding-right: 1.5rem;
+    }
+
+    label.custom-control-label::before,
+    label.custom-control-label::after {
+        right: 0;
+        left: auto;
+    }
+
+    strong {
         display: block;
         color: #018bdb;
         margin: 45px 45px 20px 20px;
@@ -89,39 +44,8 @@
         text-shadow: 0 1px 0 #000;
     }
 
-    input {
-        box-shadow: 0 0 10px 2px rgba(119, 119, 119, 0.17);
-        border-radius: 5px;
-        outline: none;
-        padding: 5px 10px;
-        margin-top: 10px;
-        border: 1px solid #eee;
-    }
-
-    label {
-        margin-top: 10px;
-    }
-
-    label > i {
-        text-shadow: 3px 1px 2px rgba(119, 119, 119, 0.17)
-    }
-
-    form > div > label {
-        border-radius: 0 5px 5px 0;
-        color: #018bdb;
-        padding: 0 10px;
-        text-align: center;
-        font-size: 28px;
-    }
-
-    .age_field {
-        width: 260px;
-    }
-
-    .hidden {
-        display: none !important;
-    }
     </style>
+
 {% endblock %}
 {% block content %}
     <div class="container">
