@@ -16,7 +16,7 @@ class User(BaseModels):
     phone: str
     password: str
     email: str = None
-    type_of_user: str
+    type_of_user: int
     extra_information: dict
 
     # TODO : username

@@ -17,7 +17,7 @@ def profile(_id):
         check_res = db_manger.check_record('users', national_code=_id)
         user = retrieve_user(check_res[0])
         tests = db_manger.read_user_tests(user)
-        return render_template("resume.html", data=user, tests=tests, )
+        return render_template("resume.html", data=user, tests=tests)
     else:
         return redirect(url_for('register'))
 
@@ -123,6 +123,7 @@ def test_all():
     if cookies.get('_ID'):
         check_res = db_manger.check_record('users', national_code=cookies.get('_ID'))
         user = retrieve_user(check_res[0])
+        print(type(user.type_of_user), user.type_of_user, user.first_name)
         if user.type_of_user == 2:
             tests = repr_all_test()
             return render_template("tests.html", tests = tests)
