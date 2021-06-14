@@ -53,7 +53,6 @@ def result(test_id):
     res = test[0][2]
     res = json.dumps(res)
     res = json.loads(res)
-    res = "پاسخ آزمایش شما هنوز صادر نشده است ، صمیمانه از صبر و شکیبایی شما مچکریم." if not res else res
     return res
 
 
