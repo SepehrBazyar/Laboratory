@@ -2,49 +2,50 @@
 {% block title %}ورود{% endblock %}
 {% block bootstrap %}{{ super() }}{% endblock %}
 {% block extra_head %}
+    {{ super() }}
+
     <style>
-        {{ super() }}
+    .valid-feedback,
+    .invalid-feedback {
+        text-align: right;
+    }
 
-        .valid-feedback,
-        .invalid-feedback {
-            text-align: right;
-        }
+    .card {
+        margin: 0.5rem auto;
+    }
 
-        .card {
-            margin: 0.5rem auto;
-        }
+    .card-body {
+        margin: 50px auto;
+        padding: 0 1rem;
+    }
 
-        .card-body {
-            margin: 50px auto;
-            padding: 0 1rem;
-        }
+    .custom-control.custom-checkbox {
+        padding-left: 0;
+        text-align: right;
+    }
 
-        .custom-control.custom-checkbox {
-            padding-left: 0;
-            text-align: right;
-        }
+    label.custom-control-label {
+        position: relative;
+        padding-right: 1.5rem;
+    }
 
-        label.custom-control-label {
-            position: relative;
-            padding-right: 1.5rem;
-        }
+    label.custom-control-label::before,
+    label.custom-control-label::after {
+        right: 0;
+        left: auto;
+    }
 
-        label.custom-control-label::before,
-        label.custom-control-label::after {
-            right: 0;
-            left: auto;
-        }
-
-        strong {
-            display: block;
-            color: #018bdb;
-            margin: 45px 45px 20px 20px;
-            font-size: 35px;
-            text-align: center;
-            text-shadow: 0 1px 0 #000;
-        }
+    strong {
+        display: block;
+        color: #018bdb;
+        margin: 45px 45px 20px 20px;
+        font-size: 35px;
+        text-align: center;
+        text-shadow: 0 1px 0 #000;
+    }
 
     </style>
+
 {% endblock %}
 {% block content %}
     <div class="container">
